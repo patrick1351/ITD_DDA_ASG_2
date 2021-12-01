@@ -1,3 +1,5 @@
+This is a refernce to how we will structure our json file to avoid confusion
+
 players {
     {userid} : {
         email: 

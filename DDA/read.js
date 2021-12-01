@@ -5,9 +5,9 @@ const db = getDatabase();
 const playerRef = ref(db, "players");
 
 //Setup our event listener
-var readBtn = document
+/*var readBtn = document
  .getElementById("btn-read")
- .addEventListener("click", getPlayerData);
+ .addEventListener("click", getPlayerData);*/
 
 //[STEP 4] Setup our player function to display info
 function getPlayerData(e) {
