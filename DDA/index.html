@@ -12,10 +12,14 @@
     <body>
         
         <h2>Simple Sign Up</h2>
-
+        
         <!-- SignUp -->
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="email" placeholder="Enter username (name@example.com)">
+            <input type="text" class="form-control" id="username" placeholder="Enter username">
+            <label for="text">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" placeholder="Enter email (name@example.com)">
             <label for="email">Email address</label>
         </div>
         <div class="form-floating">
@@ -23,16 +27,27 @@
             <label for="password">Password</label>
         </div>
         <div class="form-floating">
-            <input type="submit" class="form-control" id="floatingSubmit" placeholder="SIGN UP!">
-            <label for="floatingPassword">submit</label>
+            <input type="submit" class="form-control" id="submitSignup" placeholder="SIGN UP!">
+            <label for="password">submit</label>
         </div>
-
+        <div class="Display">
+            <div class="row align-items-start">
+              <div class="col">
+                Username
+              </div>
+              <div class="col">
+                Email
+              </div>
+              <div class="col">
+                Active
+              </div>
+            </div>
         <br>
 
         
 
         
         <script src="initialize.js" type="module"></script>
-        <script src="script.js" type="module"></script>
+        <script src="signup.js" type="module"></script>
         </body>
 </html>
