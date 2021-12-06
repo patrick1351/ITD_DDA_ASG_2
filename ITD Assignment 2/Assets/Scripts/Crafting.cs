@@ -9,13 +9,19 @@ public class Crafting : MonoBehaviour
 
     public Collider craftingSpot;
     public GameObject axePrefab;
+    //public Dictionary<string, int> curentItem = new Dictionary<string, int>();
+    public List<recipe> craftingRecipe = new List<recipe>();
 
     [SerializeField]
     bool craftAxe;
 
-    bool stone;
-    bool stick;
-    bool rope;
+    //GameObject[] stone; 
+
+
+    int stone;
+    int stick;
+    int grass;
+    int rope;
 
     private void OnTriggerEnter(Collider enter)
     {
@@ -23,35 +29,54 @@ public class Crafting : MonoBehaviour
         if(enter.gameObject.tag == "hand")
         {
             Debug.Log(enter.gameObject.name + " is a hand.");
-            if (craftAxe)
+
+            //Loop through all the crafting recipe
+            foreach(recipe i in craftingRecipe)
             {
-                Debug.Log("Crafting axe");
-                Vector3 craftingSpotPosition = this.transform.position;
-                Vector3 spawnLocation = new Vector3(craftingSpotPosition.x, craftingSpotPosition.y + 0.5f, craftingSpotPosition.z);
-                var spawnAxe = Instantiate(axePrefab, spawnLocation, Quaternion.identity);
+                //if the amount is the same for all then craft item
+                if(i.stone == stone && i.stick == stick && i.rope == rope && i.grass == grass)
+                {
+                    //Todo
+                    //Destory object used in crafting recipe
+
+                    Vector3 craftingSpotPosition = this.transform.position;
+                    Vector3 spawnLocation = new Vector3(craftingSpotPosition.x, craftingSpotPosition.y + 0.5f, craftingSpotPosition.z);
+                    var spawn = Instantiate(i.result, spawnLocation, Quaternion.identity);
+                    Debug.Log("Spawned Succefully");
+                    return;
+                } else
+                {
+                    Debug.LogFormat("{0} does not have the same recipie", i.objectName);
+                }
             }
         }
 
         if (enter.tag == "stone")
-            stone = true;
+            stone += 1;
         if (enter.tag == "stick")
-            stick = true;
+            stick += 1;
+        if (enter.tag == "grass")
+            grass += 1;
         if (enter.tag == "rope")
-            rope = true;
+            rope += 1;
 
     }
 
     private void OnTriggerExit(Collider exit)
     {
         Debug.Log(exit.name + " has exit.");
+        if (exit.tag == "stone")
+            stone -= 1;
+        if (exit.tag == "stick")
+            stick -= 1;
+        if (exit.tag == "grass")
+            grass -= 1;
+        if (exit.tag == "rope")
+            rope -= 1;
     }
 
     private void Update()
     {
-        if (stone && rope && stick)
-        {
-            craftAxe = true; 
-            Debug.Log("Please craft the axe");
-        }
+        
     }
 }
