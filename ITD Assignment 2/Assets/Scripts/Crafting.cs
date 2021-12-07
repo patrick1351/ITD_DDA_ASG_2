@@ -10,7 +10,7 @@ public class Crafting : MonoBehaviour
     public Collider craftingSpot;
     public GameObject axePrefab;
     //public Dictionary<string, int> curentItem = new Dictionary<string, int>();
-    public List<recipe> craftingRecipe = new List<recipe>();
+    public List<Recipe> craftingRecipe = new List<Recipe>();
 
     [SerializeField]
     bool craftAxe;
@@ -31,7 +31,7 @@ public class Crafting : MonoBehaviour
             Debug.Log(enter.gameObject.name + " is a hand.");
 
             //Loop through all the crafting recipe
-            foreach(recipe i in craftingRecipe)
+            foreach(Recipe i in craftingRecipe)
             {
                 //if the amount is the same for all then craft item
                 if(i.stone == stone && i.stick == stick && i.rope == rope && i.grass == grass)

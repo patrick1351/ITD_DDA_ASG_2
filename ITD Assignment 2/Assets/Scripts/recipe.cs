@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class recipe
+public class Recipe
 {
     public string objectName;
 
