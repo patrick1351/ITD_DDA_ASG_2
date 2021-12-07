@@ -49,6 +49,8 @@ public class Crafting : MonoBehaviour
                     {
                         Destroy(objectInSpot[x]);
                     }
+
+                    ResetCount();
                     return;
                 } else
                 {
@@ -101,5 +103,13 @@ public class Crafting : MonoBehaviour
                 objectInSpot.Remove(objectInSpot[i]);
             }
         }
+    }
+
+    void ResetCount()
+    {
+        stone = 0;
+        stick = 0;
+        grass = 0;
+        rope = 0;
     }
 }
