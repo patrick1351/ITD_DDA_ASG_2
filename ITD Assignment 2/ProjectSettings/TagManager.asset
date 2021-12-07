@@ -9,6 +9,7 @@ TagManager:
   - stick
   - rope
   - tree
+  - axe
   layers:
   - Default
   - TransparentFX

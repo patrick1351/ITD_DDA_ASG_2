@@ -13,9 +13,18 @@ public class Tree : MonoBehaviour
         hits += 1;
         if (hits > numberOfHitsNeeded)
         {
-            Debug.Log("Spawning Logs");
+            Debug.Log("We're going timber");
             //var log = Instantiate(logsPrefab);
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "axe")
+        {
+            Debug.Log("Its going down");
+            HitTree();
         }
     }
 }
