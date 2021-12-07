@@ -8,6 +8,7 @@ TagManager:
   - stone
   - stick
   - rope
+  - tree
   layers:
   - Default
   - TransparentFX
