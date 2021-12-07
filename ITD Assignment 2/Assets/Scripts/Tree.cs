@@ -7,6 +7,7 @@ public class Tree : MonoBehaviour
     public int numberOfHitsNeeded;
     int hits;
     public GameObject logsPrefab;
+    public GameObject leavesPrefab;
 
     public void HitTree()
     {
@@ -15,6 +16,7 @@ public class Tree : MonoBehaviour
         {
             Debug.Log("We're going timber");
             //var log = Instantiate(logsPrefab);
+            //var leaves  = Instantiate(leavesPrefab);
             Destroy(this.gameObject);
         }
     }

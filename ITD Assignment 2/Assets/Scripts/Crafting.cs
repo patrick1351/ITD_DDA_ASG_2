@@ -11,6 +11,7 @@ public class Crafting : MonoBehaviour
     public GameObject axePrefab;
     //public Dictionary<string, int> curentItem = new Dictionary<string, int>();
     public List<Recipe> craftingRecipe = new List<Recipe>();
+    public List<GameObject> objectInSpot = new List<GameObject>();
 
     [SerializeField]
     bool craftAxe;
@@ -29,6 +30,7 @@ public class Crafting : MonoBehaviour
         if(enter.gameObject.tag == "hand")
         {
             Debug.Log(enter.gameObject.name + " is a hand.");
+            Debug.Log(objectInSpot);
 
             //Loop through all the crafting recipe
             foreach(Recipe i in craftingRecipe)
@@ -36,13 +38,17 @@ public class Crafting : MonoBehaviour
                 //if the amount is the same for all then craft item
                 if(i.stone == stone && i.stick == stick && i.rope == rope && i.grass == grass)
                 {
-                    //Todo
-                    //Destory object used in crafting recipe
-
+                    Debug.LogFormat("{0} matches! Time to craft.", i.objectName);
                     Vector3 craftingSpotPosition = this.transform.position;
                     Vector3 spawnLocation = new Vector3(craftingSpotPosition.x, craftingSpotPosition.y + 0.5f, craftingSpotPosition.z);
                     var spawn = Instantiate(i.result, spawnLocation, Quaternion.identity);
                     Debug.Log("Spawned Succefully");
+
+                    //Destory object used in crafting recipe
+                    for (int x = 0; x < objectInSpot.Count; ++x)
+                    {
+                        Destroy(objectInSpot[x]);
+                    }
                     return;
                 } else
                 {
@@ -51,14 +57,28 @@ public class Crafting : MonoBehaviour
             }
         }
 
+
+        //Todo - make this simplified for in case need upscale
         if (enter.tag == "stone")
+        {
             stone += 1;
+            objectInSpot.Add(enter.gameObject);
+        }
         if (enter.tag == "stick")
+        {
             stick += 1;
+            objectInSpot.Add(enter.gameObject);
+        }
         if (enter.tag == "grass")
+        {
             grass += 1;
+            objectInSpot.Add(enter.gameObject);
+        }
         if (enter.tag == "rope")
+        {
             rope += 1;
+            objectInSpot.Add(enter.gameObject);
+        }
 
     }
 
@@ -73,10 +93,13 @@ public class Crafting : MonoBehaviour
             grass -= 1;
         if (exit.tag == "rope")
             rope -= 1;
-    }
 
-    private void Update()
-    {
-        
+        for(int i = 0; i < objectInSpot.Count; ++i)
+        {
+            if(objectInSpot[i] == exit.gameObject)
+            {
+                objectInSpot.Remove(objectInSpot[i]);
+            }
+        }
     }
 }

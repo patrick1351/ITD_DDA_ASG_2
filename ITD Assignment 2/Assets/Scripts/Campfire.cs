@@ -4,25 +4,17 @@ using UnityEngine;
 
 public class Campfire : MonoBehaviour
 {
+    public GameObject fireSparkPrefab;
+
     /// <summary>
     /// Starting chance
     /// </summary>
     float chance;
-
-    public GameObject fireSparkPrefab;
-
+    List<GameObject> stones = new List<GameObject>();
     bool fireStarted;
-
-    /// <summary>
-    /// This is used as a buffer for the number of time the stone is triggering this script 
-    /// due to having two stone script attached to the stone
-    /// </summary>
-    [HideInInspector]
-    public int stoneTrigger;
 
     private void Start()
     {
-        stoneTrigger = 0;
         chance = 30;
     }
 
@@ -44,15 +36,20 @@ public class Campfire : MonoBehaviour
         }
     }
 
-    public void triggerCampefire()
+    /// <summary>
+    /// Used to ensure script only gets trigger once when colliding
+    /// </summary>
+    public void triggerCampefire(GameObject stone)
     {
-        stoneTrigger += 1;
-        if(stoneTrigger >= 2)
+        stones.Add(stone);
+        Debug.Log(stones.Count);
+        if(stones.Count >= 1)
         {
             Debug.Log("Triggering");
-            stoneTrigger = 0;
-            var spark = Instantiate(fireSparkPrefab);
+            Vector3 spawnLocation = stones[0].transform.position;
+            var spark = Instantiate(fireSparkPrefab, spawnLocation, Quaternion.identity);
             Destroy(spark, 1f);
+            stones.Clear();
             RandomStartFire();
         }
     }

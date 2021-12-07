@@ -10,9 +10,10 @@ public class Stone : MonoBehaviour
     {
         if(collision.gameObject.tag == "stone")
         {
+            //Only works when you are in the boundary of the campfire
             if(campfireScript != null)
             {
-                campfireScript.triggerCampefire();
+                campfireScript.triggerCampefire(this.gameObject);
             }
         }
     }

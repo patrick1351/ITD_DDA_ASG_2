@@ -225,7 +225,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: axe (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 382053052860833126, guid: 86ccead9e98fadd42aea8ee28e62cfbc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 86ccead9e98fadd42aea8ee28e62cfbc, type: 3}
 --- !u!4 &72489744 stripped
 Transform:
@@ -391,13 +392,14 @@ MonoBehaviour:
     stick: 1
     rope: 1
     grass: 0
-    result: {fileID: 919132149155446097, guid: 8f04eccb925f4004292ad47703aa960e, type: 3}
+    result: {fileID: 4272074333597575000, guid: 86ccead9e98fadd42aea8ee28e62cfbc, type: 3}
   - objectName: Rope
     stone: 0
     stick: 0
     rope: 0
     grass: 2
-    result: {fileID: 919132149155446097, guid: 8f04eccb925f4004292ad47703aa960e, type: 3}
+    result: {fileID: 4272074333597575000, guid: 86ccead9e98fadd42aea8ee28e62cfbc, type: 3}
+  objectInSpot: []
   craftAxe: 0
 --- !u!1 &246895770
 GameObject:
@@ -619,7 +621,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392338910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.131, y: -0.17499998, z: -0.1}
+  m_LocalPosition: {x: -0.131, y: -0.17499998, z: -0.57000005}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 44667000}
@@ -843,7 +845,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414733953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 113.86, y: 0.65, z: -3.5}
+  m_LocalPosition: {x: 120.88, y: 0.34, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1299019702}
@@ -923,7 +925,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireSparkPrefab: {fileID: 1021301978531736274, guid: e2ef8bf47a1e7bd469ea3c15dd5751eb, type: 3}
-  stoneTrigger: 0
 --- !u!65 &598427102
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1030,11 +1031,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604787001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27700073, y: 0, z: -0.099999905}
+  m_LocalPosition: {x: 0.27700073, y: 0, z: -0.9}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 688998222}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &604787003
 MonoBehaviour:
@@ -1297,7 +1298,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: axe
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 382053052860833126, guid: 86ccead9e98fadd42aea8ee28e62cfbc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 86ccead9e98fadd42aea8ee28e62cfbc, type: 3}
 --- !u!1 &688998221
 GameObject:
@@ -1326,10 +1328,10 @@ Transform:
   m_LocalPosition: {x: 7.1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1266968077}
   - {fileID: 604787002}
   - {fileID: 882921944}
   - {fileID: 1464455205}
-  - {fileID: 1266968077}
   m_Father: {fileID: 908566465}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1363,11 +1365,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882921943}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.096, y: 0, z: -0.099999905}
+  m_LocalPosition: {x: -0.096, y: 0, z: -0.89999986}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 688998222}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &882921945
 MonoBehaviour:
@@ -2444,7 +2446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239791665}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.058, y: -0.306, z: 0.65}
+  m_LocalPosition: {x: -0.058, y: -0.306, z: 0.17999995}
   m_LocalScale: {x: 1.26662, y: 0.05, z: 0.90326005}
   m_Children: []
   m_Father: {fileID: 44667000}
@@ -2470,13 +2472,14 @@ MonoBehaviour:
     stick: 1
     rope: 1
     grass: 0
-    result: {fileID: 919132149155446097, guid: 8f04eccb925f4004292ad47703aa960e, type: 3}
+    result: {fileID: 4272074333597575000, guid: 86ccead9e98fadd42aea8ee28e62cfbc, type: 3}
   - objectName: Rope
     stone: 0
     stick: 0
     rope: 0
     grass: 2
-    result: {fileID: 919132149155446097, guid: 8f04eccb925f4004292ad47703aa960e, type: 3}
+    result: {fileID: 4272074333597575000, guid: 86ccead9e98fadd42aea8ee28e62cfbc, type: 3}
+  objectInSpot: []
   craftAxe: 0
 --- !u!65 &1239791668
 BoxCollider:
@@ -2568,11 +2571,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266968076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0009980202, y: -0.30339998, z: 0.9680002}
+  m_LocalPosition: {x: 0.0009980202, y: -0.30339998, z: -0.547}
   m_LocalScale: {x: 1.15248, y: 0.05, z: 0.51042}
   m_Children: []
   m_Father: {fileID: 688998222}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1266968078
 MonoBehaviour:
@@ -2587,7 +2590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireSparkPrefab: {fileID: 1021301978531736274, guid: e2ef8bf47a1e7bd469ea3c15dd5751eb, type: 3}
-  stoneTrigger: 0
 --- !u!65 &1266968079
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2724,7 +2726,7 @@ Transform:
   m_LocalScale: {x: 1.8187662, y: 0.34804368, z: 2.871446}
   m_Children: []
   m_Father: {fileID: 688998222}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1464455206
 BoxCollider:
@@ -3613,7 +3615,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715338449}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.38970184, y: 0, z: -0.099999905}
+  m_LocalPosition: {x: 0.38970184, y: 0, z: -0.57}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 44667000}
@@ -4426,6 +4428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfHitsNeeded: 5
   logsPrefab: {fileID: 0}
+  leavesPrefab: {fileID: 0}
 --- !u!54 &1873121393
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4547,7 +4550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958784492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2599945, y: -0.099999994, z: -0.099999905}
+  m_LocalPosition: {x: -0.2599945, y: -0.099999994, z: -0.56999993}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 44667000}
@@ -4987,6 +4990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfHitsNeeded: 5
   logsPrefab: {fileID: 0}
+  leavesPrefab: {fileID: 0}
 --- !u!54 &2125606049
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5139,7 +5143,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 3.946e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
