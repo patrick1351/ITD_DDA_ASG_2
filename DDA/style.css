@@ -1,12 +1,54 @@
 *{
     box-sizing: border-box;
 }
-
+html{
+    margin: 0px;
+}
 body{
     margin: 0px;
     padding: 0px;
 }
 
-.row align-items-start{
+nav{
     display: flex;
+    justify-content: space-between;
+    background-color: blue;
+    padding: 10px;
+}
+
+.navone{
+    display: flex;
+    margin: 0px;
+    align-items: center;
+}
+.navoneinner{
+    display: flex;
+    list-style-type: none;
+    margin: 0px;
+}
+.navoneinner li a{
+    padding: 20px;
+    text-decoration: none;
+    color: black;
+}
+.signinsection{
+    width: 100%;
+    padding-left:500px;
+    padding-right:500px;
+    padding-top:30px;
+    padding-bottom: 320px;
+}
+.form-control{
+    height: 50px;
+}
+.form-label{
+    font-size: 25px;
+}
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: yellow;
+    padding: 10px;
 }

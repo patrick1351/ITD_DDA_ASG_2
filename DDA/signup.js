@@ -8,12 +8,15 @@ const analytics = getAnalytics();
 const playerRef = ref(db, "players");
 const auth = getAuth();
 
+
 //we create a button listener to listen when someone clicks
 $("#submitSignup").click(function(event){
     event.preventDefault();
+    //Get the value from the input field
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var username = document.getElementById("username").value;
+    //Transfer the value to the createUser function
     createUser(email, password, username);
     console.log("email: " + email + "password: " + password + "Username: " + username);
 });
@@ -44,11 +47,12 @@ function setUserSignupData(userID, name, email){
       });
 }
 
-//Reading logged in info
+//Reading the Current User's info
 $("#test").click(function(){
     console.log("Viewing")
     viewPlayerData()
 });
+
 
 function viewPlayerData() {
     console.log(`userid is: ${auth.currentUser.uid}`)
@@ -67,3 +71,35 @@ function viewPlayerData() {
         }
     });
 } 
+
+//For Signing In the User
+//Btn for Signing In
+$("#signInBtn").click(function(){
+    var email = document.getElementById("emailSignIn").value;
+    var password = document.getElementById("passwordSignIn").value;
+    signInUser(email,password);
+})
+
+function signInUser(email,password){
+    console.log("Logging the User");
+    signInWithEmailAndPassword(auth, email,password).then((userCredential)=>{
+        const user = userCredential.user;
+        console.log("This log in is successful")
+    }).catch((error)=>{
+        console.log("There is trouble logging in the user" + error);
+    });
+}
+
+//For Logging Out the USer
+//Btn for Logging Out the User
+$("#logOutBtn").click(function(){
+    logOutUser();
+})
+
+function logOutUser(){
+    signOut(auth).then(() =>{
+        console.log("Logging Out of the user is successful")
+    }).catch((error)=>{
+        console.log("There is trouble signing out the user" + error);
+    })
+}
