@@ -15,7 +15,8 @@ public class Tree : MonoBehaviour
         if (hits > numberOfHitsNeeded)
         {
             Debug.Log("We're going timber");
-            //var log = Instantiate(logsPrefab);
+            Vector3 treePos = this.transform.position;
+            var log = Instantiate(logsPrefab, treePos, Quaternion.identity);
             //var leaves  = Instantiate(leavesPrefab);
             Destroy(this.gameObject);
         }
