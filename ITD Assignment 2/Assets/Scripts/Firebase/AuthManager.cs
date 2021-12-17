@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System;
 
 using Firebase;
@@ -9,7 +10,6 @@ using Firebase.Auth;
 using Firebase.Extensions;
 using Firebase.Database;
 using System.Threading.Tasks;
-using UnityEngine.SceneManagement;
 
 public class AuthManager : MonoBehaviour
 {
@@ -18,14 +18,14 @@ public class AuthManager : MonoBehaviour
     public DatabaseReference dbReference;
 
     //For signing up
-    [SerializeField] InputField emailInputUp; //The Up at the end stands for sign up
-    [SerializeField] InputField nameInputUp;
-    [SerializeField] InputField passwordInputUp;
-    //Radio/ Dropbox for choosing the region will be added later
+    [SerializeField] TMP_InputField emailInputUp; //The Up at the end stands for sign up
+    [SerializeField] TMP_InputField nameInputUp;
+    [SerializeField] TMP_InputField passwordInputUp;
+    public string region = "asia";
 
     //For signing in
-    [SerializeField] InputField emailInputIn; //The Up at the end stands for sign up
-    [SerializeField] InputField passwordInputIn;
+    [SerializeField] TMP_InputField emailInputIn; //The Up at the end stands for sign up
+    [SerializeField] TMP_InputField passwordInputIn;
 
     //For toggling the UI
     [SerializeField] GameObject CreateUI;
@@ -45,6 +45,36 @@ public class AuthManager : MonoBehaviour
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    //For Reading the dropdown box value
+    public void HandleInputData(int val)
+    {
+        if (val == 0)
+        {
+            region = "asia";
+        }
+        if (val ==1)
+        {
+            region = "africa";
+        }
+        if (val == 2)
+        {
+            region = "australia";
+        }
+        if (val == 3)
+        {
+            region = "europe";
+        }
+        if (val == 4)
+        {
+            region = "northAmerica";
+        }
+        if (val == 5)
+        {
+            region = "southAmerica";
+        }
+        Debug.Log(region);
+    }
+
     //Sign Up New Player
     public async void SignUpNewPlayer()
     {
@@ -59,7 +89,7 @@ public class AuthManager : MonoBehaviour
         if (newUser != null)
         {
             //await CreateNewUser(newUser.UserId, username, username, newUser.Email, team);
-            //await UpdatePlayerDisplayName(username);
+            await UpdatePlayerDisplayName(name);
             CreateUI.SetActive(false);
             MainMenuUI.SetActive(true);
         }
@@ -80,11 +110,47 @@ public class AuthManager : MonoBehaviour
                 newUser = task.Result;
                 Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId, newUser.Email);
-
             }
 
         });
         return newUser;
+    }
+
+    //For updating the User's display name in authentication and checking it in the console log
+    public async Task UpdatePlayerDisplayName(string displayName)
+    {
+        if (auth.CurrentUser != null)
+        {
+            //Create new user profile to update the display name
+            UserProfile profile = new UserProfile
+            {
+                DisplayName = name
+            };
+            await auth.CurrentUser.UpdateUserProfileAsync(profile).ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("Update player profile async encountered an error");
+                    return;
+                }
+                if (task.IsCanceled)
+                {
+                    Debug.LogError("Update player profile async was cancelled");
+                    return;
+                }
+
+                Debug.Log("User profile has been updated!");
+                Debug.LogFormat("Checking current user display name from auth {0}", GetCurrentPlayerName());
+            });
+        }
+    }
+
+    public string GetCurrentPlayerName()
+    {
+        string currentPlayerName = auth.CurrentUser.DisplayName;
+
+        currentPlayerName = currentPlayerName.Replace("_", " ");
+        return currentPlayerName;
     }
 
     //For creating the User Class Data
@@ -94,7 +160,7 @@ public class AuthManager : MonoBehaviour
         Debug.LogFormat("Player details : {0}", newUser.PrintUser());//Refer back the the print user function in the user class script
 
         //For creating the path root/player/$uuid     $uuid is a key
-        await dbReference.Child("players/" + uuid).SetRawJsonValueAsync(newUser.UserToJSON());
+        await dbReference.Child("players/" + uuid).SetRawJsonValueAsync(newUser.PlayerToJSON());
     }
 
     //For Signing in the player
@@ -146,8 +212,6 @@ public class AuthManager : MonoBehaviour
         {
             Debug.LogFormat("Auth user {0} {1}", auth.CurrentUser.UserId, auth.CurrentUser.Email);
             auth.SignOut();
-            //After Signing the user out, redirect them back to the starting page
-            SceneManager.LoadScene("Sign In Page");
         }
     }
 }

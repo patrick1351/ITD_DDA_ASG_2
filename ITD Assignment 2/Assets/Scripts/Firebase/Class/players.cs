@@ -37,7 +37,7 @@ public class players
     }
 
     //For converting the data to JSON
-    public string UserToJSON()
+    public string PlayerToJSON()
     {
         return JsonUtility.ToJson(this);
     }
