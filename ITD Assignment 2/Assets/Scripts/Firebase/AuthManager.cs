@@ -78,6 +78,7 @@ public class AuthManager : MonoBehaviour
     //Sign Up New Player
     public async void SignUpNewPlayer()
     {
+        //For removing long white space characters
         string email = emailInputUp.text.Trim();
         string password = passwordInputUp.text.Trim();
         FirebaseUser newUser = await SignUpNewPlayerOnly(email, password);
@@ -88,8 +89,8 @@ public class AuthManager : MonoBehaviour
 
         if (newUser != null)
         {
-            //await CreateNewUser(newUser.UserId, username, username, newUser.Email, team);
-            await UpdatePlayerDisplayName(name);
+            await CreateNewPlayer(newUser.UserId, name, newUser.Email, region);
+            await UpdateUserDisplayName(name);
             CreateUI.SetActive(false);
             MainMenuUI.SetActive(true);
         }
@@ -117,7 +118,7 @@ public class AuthManager : MonoBehaviour
     }
 
     //For updating the User's display name in authentication and checking it in the console log
-    public async Task UpdatePlayerDisplayName(string displayName)
+    public async Task UpdateUserDisplayName(string name)
     {
         if (auth.CurrentUser != null)
         {
@@ -154,7 +155,7 @@ public class AuthManager : MonoBehaviour
     }
 
     //For creating the User Class Data
-    public async Task CreateNewUser(string uuid, string name, string email, string region)
+    public async Task CreateNewPlayer(string uuid, string name, string email, string region)
     {
         players newUser = new players(name, email, region, 0);
         Debug.LogFormat("Player details : {0}", newUser.PrintUser());//Refer back the the print user function in the user class script
@@ -212,6 +213,8 @@ public class AuthManager : MonoBehaviour
         {
             Debug.LogFormat("Auth user {0} {1}", auth.CurrentUser.UserId, auth.CurrentUser.Email);
             auth.SignOut();
+            MainMenuUI.SetActive(false);
+            SignInUI.SetActive(true);
         }
     }
 }

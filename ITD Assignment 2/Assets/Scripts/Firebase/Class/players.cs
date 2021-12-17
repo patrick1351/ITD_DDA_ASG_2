@@ -10,7 +10,6 @@ public class players
     public string name;
 
     public long dateCreatedOn;
-    public long timeCreatedOn;
 
     public string region;
 
