@@ -5,15 +5,22 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Timer")]
     public TextMeshPro time;
-
     float speedrunTime;
     public bool gamePaused;
     public bool gameEnd;
 
+    [Header("Campfire")]
+    public GameObject campfireStarting;
+    public GameObject campfireBuilding;
+    BuildingObject campfireBuildingScript;
+
     private void Start()
     {
-        //StartSpeedRun();
+        campfireStarting.SetActive(false);
+        campfireBuilding.SetActive(true);
+        campfireBuildingScript = campfireBuilding.GetComponent<BuildingObject>();
     }
 
     void StartSpeedRun()
@@ -39,6 +46,12 @@ public class GameManager : MonoBehaviour
         if (!gamePaused || !gameEnd)
         {
             StartSpeedRun();
+        }
+
+        if (campfireBuildingScript != null && campfireBuildingScript.completedBuilding)
+        {
+            campfireStarting.SetActive(true);
+            campfireBuilding.SetActive(false);
         }
     }
 }
