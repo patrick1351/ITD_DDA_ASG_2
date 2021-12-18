@@ -5,6 +5,7 @@ using UnityEngine;
 public class Campfire : MonoBehaviour
 {
     public GameObject fireSparkPrefab;
+    public GameObject fireParticle;
 
     /// <summary>
     /// Starting chance
@@ -16,10 +17,12 @@ public class Campfire : MonoBehaviour
     private void Start()
     {
         chance = 30;
+        fireParticle.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //Attached this script to the stone
         if(other.gameObject.tag == "stone")
         {
             Stone stoneScript = other.GetComponent<Stone>();
@@ -29,6 +32,7 @@ public class Campfire : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        //Remove the attached script on the stone to prevent traggering campfire outside of zone
         if (other.gameObject.tag == "stone")
         {
             Stone stoneScript = other.GetComponent<Stone>();
@@ -41,10 +45,14 @@ public class Campfire : MonoBehaviour
     /// </summary>
     public void triggerCampefire(GameObject stone)
     {
+        //Add the stone to the list
         stones.Add(stone);
         Debug.Log(stones.Count);
+
+        //This is to prevent triggering script twice
         if(stones.Count >= 1)
         {
+            //create particle effect for spark
             Debug.Log("Triggering");
             Vector3 spawnLocation = stones[0].transform.position;
             var spark = Instantiate(fireSparkPrefab, spawnLocation, Quaternion.identity);
@@ -64,6 +72,7 @@ public class Campfire : MonoBehaviour
             if(randomRoll < chance)
             {
                 fireStarted = true;
+                fireParticle.SetActive(true);
                 Debug.Log("CAMPFIRE BURN BURN BURN");
             } else
             {
