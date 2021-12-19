@@ -14,13 +14,16 @@ public class GameManager : MonoBehaviour
     [Header("Campfire")]
     public GameObject campfireStarting;
     public GameObject campfireBuilding;
+    public GameObject tentBuilding;
     BuildingObject campfireBuildingScript;
+    BuildingObject tentBuildingScript;
 
     private void Start()
     {
         campfireStarting.SetActive(false);
         campfireBuilding.SetActive(true);
         campfireBuildingScript = campfireBuilding.GetComponent<BuildingObject>();
+        tentBuildingScript = tentBuilding.GetComponent<BuildingObject>();
     }
 
     void StartSpeedRun()
@@ -52,6 +55,16 @@ public class GameManager : MonoBehaviour
         {
             campfireStarting.SetActive(true);
             campfireBuilding.SetActive(false);
+        }
+
+        if (tentBuildingScript != null && campfireBuildingScript != null)
+        {
+            if(tentBuildingScript.completedBuilding && campfireBuildingScript.completedBuilding)
+            {
+                Debug.Log("<color=darkblue>Night has come</color>");
+                //Ask if they wanna switch to quiz
+                //Switch Scene
+            }
         }
     }
 }

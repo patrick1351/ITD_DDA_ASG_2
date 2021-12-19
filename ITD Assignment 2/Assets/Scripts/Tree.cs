@@ -17,7 +17,7 @@ public class Tree : MonoBehaviour
             Debug.Log("We're going timber");
             Vector3 treePos = this.transform.position;
             var log = Instantiate(logsPrefab, treePos, Quaternion.identity);
-            //var leaves  = Instantiate(leavesPrefab);
+            var leaves  = Instantiate(leavesPrefab, treePos, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
