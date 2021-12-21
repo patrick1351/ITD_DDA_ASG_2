@@ -90,11 +90,38 @@ public class AuthManager : MonoBehaviour
         if (newUser != null)
         {
             await CreateNewPlayer(newUser.UserId, name, newUser.Email, region);
-
+            CheckIfCreateTask();
             await UpdateUserDisplayName(name);
             CreateUI.SetActive(false);
             MainMenuUI.SetActive(true);
         }
+    }
+
+    public void CheckIfCreateTask()
+    {
+        dbReference.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCanceled || task.IsFaulted)
+            {
+                Debug.LogError("Sorry there was an error while trying to retrieve the team information");
+                return;
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot playerSnapshot = task.Result;
+                if (playerSnapshot.Exists)
+                {
+                    int playerCount = Convert.ToInt32(playerSnapshot.Child("players").ChildrenCount);
+                    //If this is the first player, create a brand new task board count
+                    if(playerCount == 1)
+                    {
+                        Debug.Log("This function is supposed to be called");
+                        UserTasks newTaskBoard = new UserTasks(0, 0, 0, 0);
+                        dbReference.Child("tasks").SetRawJsonValueAsync(newTaskBoard.TaskToJSON());
+                    }
+                }
+            }
+        });
     }
 
     public async Task<FirebaseUser> SignUpNewPlayerOnly(string email, string password)

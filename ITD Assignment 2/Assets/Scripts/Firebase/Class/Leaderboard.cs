@@ -6,17 +6,17 @@ public class Leaderboard : MonoBehaviour
 {
     public string userName;
     //IDK if you want this to be string or int
-    public string time;
+    public int speedRunSeconds;
 
     public Leaderboard()
     {
 
     }
 
-    public Leaderboard(string username,string time)
+    public Leaderboard(string username,int speedRunSeconds)
     {
         this.userName = username;
-        this.time = time;
+        this.speedRunSeconds = speedRunSeconds;
     }
 
     //For returning the data to JSON
