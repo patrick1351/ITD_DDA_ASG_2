@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Firebase;
 using Firebase.Auth;
 using Firebase.Extensions;
@@ -14,6 +13,8 @@ public class FirebaseManager : MonoBehaviour
     DatabaseReference dbTaskReference;
     DatabaseReference dbLeaderboardReference;
     DatabaseReference dbQuizScoreReference;
+    DatabaseReference dbPlayerReference;
+    DatabaseReference dbPlayerLogsReference;
     Firebase.Auth.FirebaseAuth auth;
 
     // Start is called before the first frame update
@@ -23,12 +24,20 @@ public class FirebaseManager : MonoBehaviour
         InitiateFirebase();
     }
 
+    private void Start()
+    {
+        Debug.LogFormat("-------------------<Color=red>{0}</Color>-----------------------", auth.CurrentUser.UserId);
+    }
+
     // Update is called once per frame
     public void InitiateFirebase()
     {
         dbLeaderboardReference = FirebaseDatabase.DefaultInstance.GetReference("leaderboard");
         dbQuizScoreReference = FirebaseDatabase.DefaultInstance.GetReference("quizScore");
         dbTaskReference = FirebaseDatabase.DefaultInstance.GetReference("tasks");
+        dbPlayerReference = FirebaseDatabase.DefaultInstance.GetReference("players/" + auth.CurrentUser.UserId);
+        //dbPlayerLogsReference = FirebaseDatabase.DefaultInstance.GetReference("playerLogs/" + auth.CurrentUser.UserId);
+        dbPlayerLogsReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     //For adding the count in the tasks data in the database--------------------------------------------------------------------------------
@@ -196,5 +205,30 @@ public class FirebaseManager : MonoBehaviour
             }
         });
         return leaderboardList;
+    }
+
+    //Writing PlayerLog----------------------------------------------------------------------------------------------------------
+    public void WritePlayerLog(PlayerLog log, TaskCompleted taskCom)
+    {
+        Debug.Log("--------------------<color=red>WRITING PLAYER LOGS</color>-------------------------------");
+        dbPlayerReference.Child("currentGame").GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("error");
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log("HELP");
+                DataSnapshot snapshot = task.Result;
+                int curentPlayerGame = int.Parse(snapshot.GetRawJsonValue());
+                string logJson = JsonUtility.ToJson(log, true);
+                Debug.Log(logJson);
+                Debug.Log(curentPlayerGame);
+                string taskJson = JsonUtility.ToJson(taskCom, true);
+                dbPlayerLogsReference.Child("playerLogs/" + auth.CurrentUser.UserId + "/game" + curentPlayerGame).SetRawJsonValueAsync(logJson);
+                dbPlayerLogsReference.Child("playerLogs/" + auth.CurrentUser.UserId + "/game" + curentPlayerGame +"/taskCompleted").SetRawJsonValueAsync(taskJson);
+            }
+        });
     }
 }

@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Timer")]
     public TextMeshPro time;
+    /// <summary>
+    /// The time in seconds only
+    /// </summary>
     float speedrunTime;
     public bool gamePaused;
     public bool gameEnd;
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour
     BuildingObject tentBuildingScript;
 
     [Header("For Firebase")]
+    public FirebaseManager firebaseScript;
     [SerializeField] PlayerLog playerLogScript;
 
     public List<string> objectsName = new List<string>();
@@ -100,21 +104,20 @@ public class GameManager : MonoBehaviour
     
     public void Check()
     {
+
         //Looping all objects
-        for (int i = 0; i < objectsName.Count; i++)
+        for (int i = 0; i < buildObjects.Count; i++)
         {
             //looping all names
             for (int x = 0; x < objectsName.Count; x++)
             {
-                //If the object matches
+                //If the object name matches
                 if(buildObjects[i].objectName == objectsName[x])
                 {
-                    //Ensue the object exist in the dictionary
-                    if (taskCompleted.ContainsKey(buildObjects[i].objectName))
-                    { 
-                        //Set the correct bool for the objects
-                        taskCompleted[objectsName[x]] = buildObjects[i].completedBuilding;
-                    }
+                    Debug.Log("--------------------<color=red>I hate dic</color>-------------------------------");
+                    Debug.Log(objectsName[x] +"    " + taskCompleted[objectsName[x]]);
+                    //Set the correct bool for the objects
+                    taskCompleted[objectsName[x]] = true;
                 }
             }
         }
@@ -122,7 +125,9 @@ public class GameManager : MonoBehaviour
 
     void ToPlayerLog()
     {
-        playerLogScript = new PlayerLog(speedrun, speedrunTimeString, finished);
+        TaskCompleted taskCompletedScript = new TaskCompleted(taskCompleted["rope"], taskCompleted["axe"], taskCompleted["chopTree"], taskCompleted["campfire"], taskCompleted["tent"]);
+        playerLogScript = new PlayerLog(speedrun, speedrunTimeString, (int)speedrunTime, finished);
+        firebaseScript.WritePlayerLog(playerLogScript, taskCompletedScript);
         published = true;
     }
 }
