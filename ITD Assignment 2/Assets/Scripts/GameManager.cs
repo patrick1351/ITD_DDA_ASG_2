@@ -18,10 +18,24 @@ public class GameManager : MonoBehaviour
     BuildingObject campfireBuildingScript;
     BuildingObject tentBuildingScript;
 
+    [Header("For Firebase")]
+    public bool speedrun;
+    [SerializeField] string speedunTime;
+    [SerializeField] int quizScore; 
+    [SerializeField] bool finished;
+    public Dictionary<string, bool> taskCompleted = new Dictionary<string, bool>();
+
     private void Start()
     {
+        taskCompleted.Add("rope", false);
+        taskCompleted.Add("tent", false);
+        taskCompleted.Add("axe", false);
+        taskCompleted.Add("chopTree", false);
+        taskCompleted.Add("campfire", false);
+
         campfireStarting.SetActive(false);
         campfireBuilding.SetActive(true);
+
         campfireBuildingScript = campfireBuilding.GetComponent<BuildingObject>();
         tentBuildingScript = tentBuilding.GetComponent<BuildingObject>();
     }
