@@ -12,7 +12,7 @@ public class Campfire : MonoBehaviour
     /// </summary>
     float chance;
     List<GameObject> stones = new List<GameObject>();
-    bool fireStarted;
+    public bool fireStarted;
 
     private void Start()
     {

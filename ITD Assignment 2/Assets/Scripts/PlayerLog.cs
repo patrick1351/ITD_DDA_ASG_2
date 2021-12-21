@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class PlayerLog
 {
     public bool speedrun;
-    public string speedunTime;
+    public string speedrunTime;
     public int quizScore;
     public bool finished;
 
@@ -12,11 +13,10 @@ public class PlayerLog
         
     }
     
-    public PlayerLog(bool speedrun, string time, int score, bool finish)
+    public PlayerLog(bool speedrun, string time, bool finish)
     {
         this.speedrun = speedrun;
-        this.speedunTime = time;
-        this.quizScore = score;
+        this.speedrunTime = time;
         this.finished = finish;
     }
 }
