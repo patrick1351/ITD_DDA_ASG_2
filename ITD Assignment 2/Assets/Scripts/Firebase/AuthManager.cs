@@ -75,7 +75,7 @@ public class AuthManager : MonoBehaviour
         Debug.Log(region);
     }
 
-    //Sign Up New Player
+    //Sign Up New Player----------------------------------------------------------------------------------------------------------------------
     public async void SignUpNewPlayer()
     {
         //For removing long white space characters
@@ -90,6 +90,7 @@ public class AuthManager : MonoBehaviour
         if (newUser != null)
         {
             await CreateNewPlayer(newUser.UserId, name, newUser.Email, region);
+
             await UpdateUserDisplayName(name);
             CreateUI.SetActive(false);
             MainMenuUI.SetActive(true);
@@ -157,14 +158,14 @@ public class AuthManager : MonoBehaviour
     //For creating the User Class Data
     public async Task CreateNewPlayer(string uuid, string name, string email, string region)
     {
-        players newUser = new players(name, email, region, 0);
+        Players newUser = new Players(name, email, region, 0);
         Debug.LogFormat("Player details : {0}", newUser.PrintUser());//Refer back the the print user function in the user class script
 
         //For creating the path root/player/$uuid     $uuid is a key
         await dbReference.Child("players/" + uuid).SetRawJsonValueAsync(newUser.PlayerToJSON());
     }
 
-    //For Signing in the player
+    //For Signing in the player-----------------------------------------------------------------------------------------------------------------
     //For checking if the user exists in the database and if yes, sign in new user
     public void SignInUser()
     {
@@ -188,7 +189,7 @@ public class AuthManager : MonoBehaviour
         });
     }
 
-    //For pressing the Forget Password button
+    //For pressing the Forget Password button-------------------------------------------------------------------------------------------------
     //For Reseting the password of a user's account
     public void ForgetPassword()
     {
@@ -206,7 +207,7 @@ public class AuthManager : MonoBehaviour
         });
     }
 
-    //For Signing Out User
+    //For Signing Out User---------------------------------------------------------------------------------------------------------------
     public void SignOutUser()
     {
         if (auth.CurrentUser != null)

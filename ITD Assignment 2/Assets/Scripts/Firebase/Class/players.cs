@@ -3,36 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class players
+public class Players
 {
     //For the Player Profile
     public string email;
     public string name;
 
-    public long dateCreatedOn;
+    public string dateCreatedOn;
+    public string timeCreatedOn;
 
     public string region;
 
     //For the timestamps
-    public long lastLoggedIn;
+    public string lastLoggedIn;
 
     public int currentGame = 0;
 
     //Empty constructor
-    public players()
+    public Players()
     {
 
     }
 
-    public players(string email,string name, string region, int currentGame = 0)
+    public Players(string email,string name, string region, int currentGame = 0)
     {
         this.email = email;
         this.name = name;
-        this.region = region;
 
-        var timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-        this.lastLoggedIn = timestamp;
-        this.dateCreatedOn = timestamp;
+        this.lastLoggedIn = System.DateTime.Now.ToString("dd/MM/yyyy");
+        //To create the time thats base on local Time
+        this.timeCreatedOn = System.DateTime.Now.ToString("HH:mm");
+
+        this.region = region;
+        
+        this.dateCreatedOn = System.DateTime.Now.ToString("HH:mm " + " dd/MM/yyyy");
+
+        
     }
 
     //For converting the data to JSON
