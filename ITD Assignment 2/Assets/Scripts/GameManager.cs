@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    bool published;
+    [HideInInspector]
+    public bool published;
 
     [Header("Timer")]
     public TextMeshPro time;
@@ -14,7 +16,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     float speedrunTime;
     public bool gamePaused;
-    public bool gameEnd;
 
     [Header("Campfire")]
     public GameObject campfireStarting;
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public bool speedrun;
     [SerializeField] string speedrunTimeString;
-    [SerializeField] bool finished;
+    public bool finished;
     public Dictionary<string, bool> taskCompleted = new Dictionary<string, bool>();
 
     private void Start()
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!gamePaused || !gameEnd)
+        if (!gamePaused || !finished)
         {
             StartSpeedRun();
         }
@@ -89,15 +90,11 @@ public class GameManager : MonoBehaviour
 
         if (tentBuildingScript != null && campfireBuildingScript != null)
         {
+            //Finished building tent and fire started
             if(tentBuildingScript.completedBuilding && campfireScript.fireStarted)
             {
+                finished = true;
                 Debug.Log("<color=darkblue>Night has come</color>");
-                if (!published)
-                {
-                    ToPlayerLog();
-                }
-                //Ask if they wanna switch to quiz
-                //Switch Scene
             }
         }
     }
@@ -123,11 +120,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void ToPlayerLog()
+    public void ToPlayerLog()
     {
         TaskCompleted taskCompletedScript = new TaskCompleted(taskCompleted["rope"], taskCompleted["axe"], taskCompleted["chopTree"], taskCompleted["campfire"], taskCompleted["tent"]);
         playerLogScript = new PlayerLog(speedrun, speedrunTimeString, (int)speedrunTime, finished);
         firebaseScript.WritePlayerLog(playerLogScript, taskCompletedScript);
         published = true;
+        SceneManager.LoadScene("Quiz");
     }
 }

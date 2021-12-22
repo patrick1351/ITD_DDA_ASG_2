@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Crafting : MonoBehaviour
 {
-    //Todo
-    //Delate the gameobject
-
     public Collider craftingSpot;
     public GameObject axePrefab;
-    //public Dictionary<string, int> curentItem = new Dictionary<string, int>();
     public List<Recipe> craftingRecipe = new List<Recipe>();
     public List<GameObject> objectInSpot = new List<GameObject>();
 
     [SerializeField]
     bool craftAxe;
 
-    //GameObject[] stone; 
-
-
     int stone;
     int stick;
     int grass;
     int rope;
+
+    GameManager gmScript;
+
+    private void Start()
+    {
+        gmScript = FindObjectOfType<GameManager>();
+    }
 
     private void OnTriggerEnter(Collider enter)
     {
@@ -43,6 +43,15 @@ public class Crafting : MonoBehaviour
                     Vector3 spawnLocation = new Vector3(craftingSpotPosition.x, craftingSpotPosition.y + 0.5f, craftingSpotPosition.z);
                     var spawn = Instantiate(i.result, spawnLocation, Quaternion.identity);
                     Debug.Log("Spawned Succefully");
+
+                    if(i.objectName == "rope")
+                    {
+                        gmScript.taskCompleted["rope"] = true;
+                    } 
+                    else if (i.objectName == "axe")
+                    {
+                        gmScript.taskCompleted["axe"] = true;
+                    }
 
                     //Destory object used in crafting recipe
                     for (int x = 0; x < objectInSpot.Count; ++x)

@@ -8,6 +8,12 @@ public class Tree : MonoBehaviour
     int hits;
     public GameObject logsPrefab;
     public GameObject leavesPrefab;
+    GameManager gmScript;
+
+    private void Start()
+    {
+        gmScript = FindObjectOfType<GameManager>();
+    }
 
     public void HitTree()
     {
@@ -18,6 +24,7 @@ public class Tree : MonoBehaviour
             Vector3 treePos = this.transform.position;
             var log = Instantiate(logsPrefab, treePos, Quaternion.identity);
             var leaves  = Instantiate(leavesPrefab, treePos, Quaternion.identity);
+            gmScript.taskCompleted["chopTree"] = true;
             Destroy(this.gameObject);
         }
     }
