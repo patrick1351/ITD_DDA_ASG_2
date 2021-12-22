@@ -12,6 +12,7 @@ TagManager:
   - axe
   - log
   - leaf
+  - grass
   layers:
   - Default
   - TransparentFX
