@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Auth;
 using Firebase.Extensions;
@@ -36,9 +37,9 @@ public class FirebaseManager : MonoBehaviour
         dbQuizScoreReference = FirebaseDatabase.DefaultInstance.GetReference("quizScore");
         dbTaskReference = FirebaseDatabase.DefaultInstance.GetReference("tasks");
         dbPlayerReference = FirebaseDatabase.DefaultInstance.GetReference("players/" + auth.CurrentUser.UserId);
-        //dbPlayerLogsReference = FirebaseDatabase.DefaultInstance.GetReference("playerLogs/" + auth.CurrentUser.UserId);
         dbPlayerLogsReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
+
 
     //For adding the count in the tasks data in the database--------------------------------------------------------------------------------
     public void addRopeNumber()
@@ -151,14 +152,14 @@ public class FirebaseManager : MonoBehaviour
         });
     }
 
-    //Writing Quiz Score--------------------------------------------------------------------------------------------------------------------
+
+    //Writing Quiz and leaderboard Score--------------------------------------------------------------------------------------------------------------------
     public void WriteQuizScore(int quizScore)
     {
         string currentUUID = auth.CurrentUser.UserId;
         dbQuizScoreReference.Child(currentUUID).SetValueAsync(quizScore.ToString());
     }
-
-    //Writing the Leaderboard Score----------------------------------------------------------------------------------------------------------
+    
     public void WriteLeaderboardData(int speedRunSeconds)
     {
         Leaderboard newData = new Leaderboard(auth.CurrentUser.DisplayName, speedRunSeconds);
@@ -207,6 +208,7 @@ public class FirebaseManager : MonoBehaviour
         return leaderboardList;
     }
 
+
     //Writing PlayerLog----------------------------------------------------------------------------------------------------------
     public void WritePlayerLog(PlayerLog log, TaskCompleted taskCom)
     {
@@ -228,6 +230,27 @@ public class FirebaseManager : MonoBehaviour
                 string taskJson = JsonUtility.ToJson(taskCom, true);
                 dbPlayerLogsReference.Child("playerLogs/" + auth.CurrentUser.UserId + "/game" + curentPlayerGame).SetRawJsonValueAsync(logJson);
                 dbPlayerLogsReference.Child("playerLogs/" + auth.CurrentUser.UserId + "/game" + curentPlayerGame +"/taskCompleted").SetRawJsonValueAsync(taskJson);
+            }
+        });
+    }
+
+
+    //Adding to the current game count--------------------------------------------------------------------------------------------------
+    public void AddCurrentGame()
+    {
+        dbPlayerReference.Child("currentGame").GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("error");
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                int curentPlayerGame = int.Parse(snapshot.GetRawJsonValue());
+                curentPlayerGame += 1;
+                dbPlayerReference.Child("currentGame").SetValueAsync(curentPlayerGame);
+                SceneManager.LoadScene("Game");
             }
         });
     }

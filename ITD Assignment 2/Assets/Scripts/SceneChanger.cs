@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    public FirebaseManager fbScript;
+
     public void startGame()
     {
-        SceneManager.LoadScene("Game");
+        fbScript.AddCurrentGame();
     }
     public void mainMenu()
     {

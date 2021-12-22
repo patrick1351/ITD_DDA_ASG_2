@@ -18,21 +18,25 @@ public class AuthManager : MonoBehaviour
     public DatabaseReference dbReference;
 
     //For signing up
+    [Header("Sign Up UI")]
     [SerializeField] TMP_InputField emailInputUp; //The Up at the end stands for sign up
     [SerializeField] TMP_InputField nameInputUp;
     [SerializeField] TMP_InputField passwordInputUp;
     public string region = "asia";
 
     //For signing in
+    [Header("Sign In UI")]
     [SerializeField] TMP_InputField emailInputIn; //The Up at the end stands for sign up
     [SerializeField] TMP_InputField passwordInputIn;
 
     //For toggling the UI
+    [Header("Full Gameobject")]
     [SerializeField] GameObject CreateUI;
     [SerializeField] GameObject SignInUI;
     [SerializeField] GameObject MainMenuUI;
 
     //Buttons
+    [Header("UI Button")]
     [SerializeField] Button signUpButton;
     [SerializeField] Button signInButton;
     [SerializeField] Button forgetPasswordButton;
@@ -74,6 +78,7 @@ public class AuthManager : MonoBehaviour
         }
         Debug.Log(region);
     }
+
 
     //Sign Up New Player----------------------------------------------------------------------------------------------------------------------
     public async void SignUpNewPlayer()
@@ -192,6 +197,7 @@ public class AuthManager : MonoBehaviour
         await dbReference.Child("players/" + uuid).SetRawJsonValueAsync(newUser.PlayerToJSON());
     }
 
+
     //For Signing in the player-----------------------------------------------------------------------------------------------------------------
     //For checking if the user exists in the database and if yes, sign in new user
     public void SignInUser()
@@ -211,7 +217,6 @@ public class AuthManager : MonoBehaviour
                 Debug.LogFormat("Welcome to You Survive {0} :: {1}", currentPlayer.UserId, currentPlayer.Email);
                 SignInUI.SetActive(false);
                 MainMenuUI.SetActive(true);
-
             }
         });
     }
