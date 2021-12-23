@@ -7,6 +7,7 @@ public class Leaderboard : MonoBehaviour
     public string userName;
     //IDK if you want this to be string or int
     public int speedRunSeconds;
+    public string speedRunTime;
 
     public Leaderboard()
     {
