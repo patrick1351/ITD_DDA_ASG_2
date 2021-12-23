@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
 
     public void ToLeaderboard()
     {
-
+        firebaseScript.WriteLeaderboardData((int)speedrunTime, speedrunTimeString);
     }
 
     public void ToPlayerLog()

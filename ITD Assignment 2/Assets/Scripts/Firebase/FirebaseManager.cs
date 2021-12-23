@@ -19,15 +19,16 @@ public class FirebaseManager : MonoBehaviour
     Firebase.Auth.FirebaseAuth auth;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         auth = FirebaseAuth.DefaultInstance;
         InitiateFirebase();
-    }
-
-    private void Start()
-    {
-        Debug.LogFormat("-------------------<Color=red>{0}</Color>-----------------------", auth.CurrentUser.UserId);
+        if(auth.CurrentUser != null)
+        {
+            Debug.LogFormat("-------------------<Color=red>{0}</Color>-----------------------", auth.CurrentUser.UserId);
+            LeaderboardManager lbmScript = FindObjectOfType<LeaderboardManager>();
+            lbmScript.UpdateLeaderboardUI();
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class FirebaseManager : MonoBehaviour
         dbLeaderboardReference = FirebaseDatabase.DefaultInstance.GetReference("leaderboard");
         dbQuizScoreReference = FirebaseDatabase.DefaultInstance.GetReference("quizScore");
         dbTaskReference = FirebaseDatabase.DefaultInstance.GetReference("tasks");
-        dbPlayerReference = FirebaseDatabase.DefaultInstance.GetReference("players/" + auth.CurrentUser.UserId);
+        dbPlayerReference = FirebaseDatabase.DefaultInstance.GetReference("players");
         dbPlayerLogsReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
@@ -160,16 +161,46 @@ public class FirebaseManager : MonoBehaviour
         dbQuizScoreReference.Child(currentUUID).SetValueAsync(quizScore.ToString());
     }
     
-    public void WriteLeaderboardData(int speedRunSeconds)
+    public void WriteLeaderboardData(int speedRunSeconds, string speedRunTime)
     {
-        Leaderboard newData = new Leaderboard(auth.CurrentUser.DisplayName, speedRunSeconds);
-        dbLeaderboardReference.Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(newData.LeaderboardToJSON());
+        dbLeaderboardReference.Child(auth.CurrentUser.UserId).Child("speedRunSeconds").GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.Log("There is error in getting the speedRunSeconds");
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot leaderboardDS = task.Result;
+                if (leaderboardDS.Exists)
+                {
+                    Debug.Log(Convert.ToInt32(leaderboardDS.Value));
+                    if (speedRunSeconds < Convert.ToInt32(leaderboardDS.Value))
+                    {
+                        //Debug.Log("Is this function being called?");
+                        Leaderboard newData = new Leaderboard(auth.CurrentUser.DisplayName, speedRunSeconds, speedRunTime);
+                        dbLeaderboardReference.Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(newData.LeaderboardToJSON());
+                    }
+                    else
+                    {
+                        Debug.Log("The highscore was not beaten");
+                        return;
+                    }
+                }
+                else
+                {
+                    Leaderboard newData = new Leaderboard(auth.CurrentUser.DisplayName, speedRunSeconds, speedRunTime);
+                    dbLeaderboardReference.Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(newData.LeaderboardToJSON());
+                    //Debug.Log("The data does not exist. Therefore we are writing this data.");
+                }
+            }
+        });
     }
 
     //For Showing the Leaderboard data
-    public async Task<List<Leaderboard>>GetLeaderboard(int limit = 5)
+    public async Task<List<Leaderboard>>GetLeaderboard(int limit)
     {
-        Query leaderboardQuery = dbLeaderboardReference.OrderByChild("speedRunSeconds").LimitToLast(limit);
+        Query leaderboardQuery = dbLeaderboardReference.Child("leaderboard").OrderByChild("speedRunSeconds").LimitToLast(limit);
 
         List<Leaderboard> leaderboardList = new List<Leaderboard>();
         await dbLeaderboardReference.GetValueAsync().ContinueWithOnMainThread(task =>
@@ -186,11 +217,12 @@ public class FirebaseManager : MonoBehaviour
                     //int rankCounter = 1;
                     foreach (DataSnapshot i in snapshot.Children)
                     {
+
                         Leaderboard leaderboard = JsonUtility.FromJson<Leaderboard>(i.GetRawJsonValue());
 
                         leaderboardList.Add(leaderboard);
 
-                        //Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Score{2}, rankcounter",rankCounter, leaderboard.userName, leaderboard.highScore);
+                        //Debug.LogFormat("Leaderboard Playername {0} Speedruntime{1}", leaderboard.userName, leaderboard.speedRunSeconds);
                     }
                 }
             }
@@ -203,7 +235,7 @@ public class FirebaseManager : MonoBehaviour
     public void WritePlayerLog(PlayerLog log, TaskCompleted taskCom)
     {
         Debug.Log("--------------------<color=red>WRITING PLAYER LOGS</color>-------------------------------");
-        dbPlayerReference.Child("currentGame").GetValueAsync().ContinueWithOnMainThread(task =>
+        dbPlayerReference.Child(auth.CurrentUser.UserId).Child("currentGame").GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted)
             {
@@ -243,5 +275,10 @@ public class FirebaseManager : MonoBehaviour
                 SceneManager.LoadScene("Game");
             }
         });
+    }
+
+    public void TestAddLeaderboard()
+    {
+        WriteLeaderboardData(150, "Second Place");
     }
 }

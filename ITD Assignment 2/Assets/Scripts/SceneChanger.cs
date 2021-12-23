@@ -45,8 +45,9 @@ public class SceneChanger : MonoBehaviour
                 //Game is finished and has not been published before
                 if (gmScript.finished && !gmScript.published)
                 {
-
-                    gmScript.ToPlayerLog();                
+                    gmScript.ToLeaderboard();
+                    gmScript.ToPlayerLog();  
+                    
                 }
             } 
             else

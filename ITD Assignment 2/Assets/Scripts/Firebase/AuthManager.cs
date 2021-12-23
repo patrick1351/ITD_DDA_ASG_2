@@ -50,9 +50,9 @@ public class AuthManager : MonoBehaviour
             SignInUI.SetActive(false);
             Debug.Log("There is currently a user that is logged in");
         }
-        else
+        else if(auth.CurrentUser == null)
         {
-            Debug.Log("There is not current user");
+            Debug.Log("There is no current user");
         }
     }
 
@@ -224,6 +224,8 @@ public class AuthManager : MonoBehaviour
                 Debug.LogFormat("Welcome to You Survive {0} :: {1}", currentPlayer.UserId, currentPlayer.Email);
                 SignInUI.SetActive(false);
                 MainMenuUI.SetActive(true);
+                LeaderboardManager lbmScript = FindObjectOfType<LeaderboardManager>();
+                lbmScript.UpdateLeaderboardUI();
             }
         });
     }
