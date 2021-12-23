@@ -192,16 +192,6 @@ public class FirebaseManager : MonoBehaviour
 
                         //Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Score{2}, rankcounter",rankCounter, leaderboard.userName, leaderboard.highScore);
                     }
-
-                    //Change the list to descending order since the data was sorted in ascending order before; It shows the lowest score first
-                    leaderboardList.Reverse();
-
-                    //For each leaderboard object inside the list
-                    /*foreach(Leaderboard leaderboard in leaderboardList)
-                    {
-                        //Debug.LogFormat("Leaderboard: Rank {0} Playername {1} Score{2}, rankcounter", rankCounter, leaderboard.userName, leaderboard.highScore);
-                        rankCounter++;
-                    }*/
                 }
             }
         });

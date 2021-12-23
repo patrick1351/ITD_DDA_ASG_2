@@ -49,6 +49,20 @@ public class AuthManager : MonoBehaviour
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    public void Update()
+    {
+        if (auth.CurrentUser != null)
+        {
+            MainMenuUI.SetActive(true);
+            SignInUI.SetActive(false);
+            Debug.Log("There is currently a user that is logged in");
+        }
+        else
+        {
+            Debug.Log("There is not current user");
+        }
+    }
+
     //For Reading the dropdown box value
     public void HandleInputData(int val)
     {
