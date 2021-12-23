@@ -27,7 +27,8 @@ public class FirebaseManager : MonoBehaviour
         {
             Debug.LogFormat("-------------------<Color=red>{0}</Color>-----------------------", auth.CurrentUser.UserId);
             LeaderboardManager lbmScript = FindObjectOfType<LeaderboardManager>();
-            lbmScript.UpdateLeaderboardUI();
+            if (lbmScript != null)
+                lbmScript.UpdateLeaderboardUI();
         }
     }
 
@@ -260,7 +261,7 @@ public class FirebaseManager : MonoBehaviour
     //Adding to the current game count--------------------------------------------------------------------------------------------------
     public void AddCurrentGame()
     {
-        dbPlayerReference.Child("currentGame").GetValueAsync().ContinueWithOnMainThread(task =>
+        dbPlayerReference.Child(auth.CurrentUser.UserId).Child("currentGame").GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted)
             {
@@ -268,6 +269,7 @@ public class FirebaseManager : MonoBehaviour
             }
             else if (task.IsCompleted)
             {
+                Debug.Log("Moving");
                 DataSnapshot snapshot = task.Result;
                 int curentPlayerGame = int.Parse(snapshot.GetRawJsonValue());
                 curentPlayerGame += 1;
@@ -275,10 +277,5 @@ public class FirebaseManager : MonoBehaviour
                 SceneManager.LoadScene("Game");
             }
         });
-    }
-
-    public void TestAddLeaderboard()
-    {
-        WriteLeaderboardData(150, "Second Place");
     }
 }

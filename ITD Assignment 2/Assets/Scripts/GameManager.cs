@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     void StartSpeedRun()
     {
-        speedrunTime += Time.deltaTime * 10;
+        speedrunTime += Time.deltaTime;
         int hours = ((int)speedrunTime / 60) / 60;
         int minutes = (int)speedrunTime / 60;
         int seconds = (int)speedrunTime;
