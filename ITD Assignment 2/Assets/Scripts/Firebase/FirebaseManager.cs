@@ -169,7 +169,7 @@ public class FirebaseManager : MonoBehaviour
     //For Showing the Leaderboard data
     public async Task<List<Leaderboard>>GetLeaderboard(int limit = 5)
     {
-        Query leaderboardQuery = dbLeaderboardReference.OrderByChild("highScore").LimitToLast(limit);
+        Query leaderboardQuery = dbLeaderboardReference.OrderByChild("speedRunSeconds").LimitToLast(limit);
 
         List<Leaderboard> leaderboardList = new List<Leaderboard>();
         await dbLeaderboardReference.GetValueAsync().ContinueWithOnMainThread(task =>

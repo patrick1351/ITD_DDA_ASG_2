@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class LeaderboardManageer : MonoBehaviour
+public class LeaderboardManager : MonoBehaviour
 {
     public FirebaseManager firebaseManager;
     public GameObject rowPrefab;
@@ -35,8 +35,13 @@ public class LeaderboardManageer : MonoBehaviour
             GameObject entry = Instantiate(rowPrefab, tableContent);
             TextMeshProUGUI[] leaderboardDetails = entry.GetComponentsInChildren<TextMeshProUGUI>();
 
+            //For the rank number
             leaderboardDetails[0].text = rankCounter.ToString();
+
+            //For the username
             leaderboardDetails[1].text = leaderboard.userName;
+
+            //For the speedrun seconds
             leaderboardDetails[3].text = leaderboard.speedRunSeconds.ToString();
 
             rankCounter++;
