@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 public class Quiz : MonoBehaviour
 {
     public int correctAnswers;
-    FirebaseManager firebaseManager;
+    public FirebaseManager firebaseManager;
 
     public TMP_Text finalScore;
 

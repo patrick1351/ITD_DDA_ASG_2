@@ -70,21 +70,34 @@ public class GameManager : MonoBehaviour
 
     void StartSpeedRun()
     {
-        speedrunTime += Time.deltaTime;
+        speedrunTime += Time.deltaTime * 10;
         float hours = (speedrunTime / 60) / 60;
         float minutes = speedrunTime / 60;
-        float seconds = speedrunTime;
-        if(seconds > 60)
+        float seconds = speedrunTime; // - (speedrunTime / 60);
+
+        Debug.LogFormat("{0}:{1}:{2}", (int)hours, (int)minutes, (int)seconds);
+
+        if(seconds == 60f)
         {
-            seconds = seconds - (minutes * 60);
+            seconds -= minutes * 60;
+            Debug.Log("The time now is:" + seconds);
         }
+
+        //seconds = calculateSeconds(seconds, minutes);
 
         if(minutes > 60)
         {
-            minutes = minutes - (hours * 60);
+            minutes -= (hours * 60);
         }
         speedrunTimeString = string.Format("{0}:{1}:{2}", (int)hours, (int)minutes, (int)seconds);
         time.text = string.Format("{0}:{1}:{2}", (int)hours, (int)minutes, (int)seconds);
+    }
+
+    float calculateSeconds(float sec, float min)
+    {
+        sec -= min * 60;
+        Debug.Log(sec);
+        return sec;
     }
 
     private void Update()

@@ -259,6 +259,6 @@ public class AuthManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        //SignOutUser();
+        SignOutUser();
     }
 }

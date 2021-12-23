@@ -438,6 +438,8 @@ GameObject:
   - component: {fileID: 3215205767302326206}
   - component: {fileID: 26097124829973353}
   - component: {fileID: 3372906727075439307}
+  - component: {fileID: 3821002620724316718}
+  - component: {fileID: 3854671877141524917}
   m_Layer: 0
   m_Name: stone_axe
   m_TagString: axe
@@ -508,6 +510,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &3821002620724316718
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235176912488991629}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &3854671877141524917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235176912488991629}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 220.4794, y: 153.71854, z: 150.29456}
+  m_Center: {x: -5.167675, y: 0.0070991516, z: 11.470154}
 --- !u!1 &4799610409067178179
 GameObject:
   m_ObjectHideFlags: 0
