@@ -257,4 +257,8 @@ public class AuthManager : MonoBehaviour
             SignInUI.SetActive(true);
         }
     }
+    private void OnApplicationQuit()
+    {
+        //SignOutUser();
+    }
 }

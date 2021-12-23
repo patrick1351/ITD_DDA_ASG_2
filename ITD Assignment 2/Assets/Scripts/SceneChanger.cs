@@ -7,14 +7,22 @@ public class SceneChanger : MonoBehaviour
 {
     public FirebaseManager fbScript;
     public GameManager gmScript;
+    public SpeedrunCheck spScript;
 
     private void Start()
     {
         gmScript = FindObjectOfType<GameManager>();
     }
 
-    public void startGame()
+    public void startGame(bool speedrun)
     {
+        if (speedrun)
+        {
+            spScript.speedunTime = speedrun;
+        } else
+        {
+            spScript.speedunTime = false;
+        }
         fbScript.AddCurrentGame();
     }
     public void mainMenu()

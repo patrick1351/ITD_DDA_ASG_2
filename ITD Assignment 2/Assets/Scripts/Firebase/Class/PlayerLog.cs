@@ -7,7 +7,6 @@ public class PlayerLog
     public bool speedrun;
     public string speedrunTime;
     public int speedrunSeconds;
-    public int quizScore;
     public bool finished;
 
     public PlayerLog(){

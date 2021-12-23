@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     float speedrunTime;
     public bool gamePaused;
+    SpeedrunCheck spScript;
 
     [Header("Campfire")]
     public GameObject campfireStarting;
@@ -54,6 +55,17 @@ public class GameManager : MonoBehaviour
         campfireScript = campfireStarting.GetComponent<Campfire>();
         campfireBuildingScript = campfireBuilding.GetComponent<BuildingObject>();
         tentBuildingScript = tentBuilding.GetComponent<BuildingObject>();
+        spScript = FindObjectOfType<SpeedrunCheck>();
+        if(spScript != null)
+        {
+            if (spScript.speedunTime)
+            {
+                time.gameObject.SetActive(true);
+            } else
+            {
+                time.gameObject.SetActive(false);
+            }
+        }
     }
 
     void StartSpeedRun()
@@ -99,9 +111,11 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// To check if task is completed for the object and set it to the correct bool
+    /// </summary>
     public void Check()
     {
-
         //Looping all objects
         for (int i = 0; i < buildObjects.Count; i++)
         {
