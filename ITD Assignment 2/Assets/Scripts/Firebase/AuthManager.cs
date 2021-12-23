@@ -26,7 +26,7 @@ public class AuthManager : MonoBehaviour
 
     //For signing in
     [Header("Sign In UI")]
-    [SerializeField] TMP_InputField emailInputIn; //The Up at the end stands for sign up
+    [SerializeField] TMP_InputField emailInputIn; //The In at the end stands for sign up
     [SerializeField] TMP_InputField passwordInputIn;
 
     //For toggling the UI
@@ -35,14 +35,7 @@ public class AuthManager : MonoBehaviour
     [SerializeField] GameObject SignInUI;
     [SerializeField] GameObject MainMenuUI;
 
-    //Buttons
-    [Header("UI Button")]
-    [SerializeField] Button signUpButton;
-    [SerializeField] Button signInButton;
-    [SerializeField] Button forgetPasswordButton;
-    [SerializeField] Button signOutButton;
-
-    public void Awake()
+    public void Start()
     {
         //Get the firebase reference on awake
         auth = FirebaseAuth.DefaultInstance;
@@ -216,10 +209,10 @@ public class AuthManager : MonoBehaviour
     //For checking if the user exists in the database and if yes, sign in new user
     public void SignInUser()
     {
-        string email = emailInputIn.text.Trim();
-        string password = passwordInputIn.text.Trim();
+        string emailIn = emailInputIn.text.Trim();
+        string passwordIn = passwordInputIn.text.Trim();
 
-        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task => {
+        auth.SignInWithEmailAndPasswordAsync(emailIn, passwordIn).ContinueWithOnMainThread(task => {
             if (task.IsCanceled || task.IsFaulted)
             {
                 Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
