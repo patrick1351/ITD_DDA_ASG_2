@@ -1,3 +1,7 @@
+@font-face {
+    font-family: lean;
+    src: url(Font/Lean.otf);
+  }
 *{
     box-sizing: border-box;
 }
@@ -12,8 +16,8 @@ body{
 nav{
     display: flex;
     justify-content: space-between;
-    background-color: grey;
-    padding: 10px;
+    align-items: center;
+    background-color: #513F2E;
 }
 
 /* Logo */
@@ -22,17 +26,38 @@ nav{
     margin: 0px;
     align-items: center;
 }
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+.logo img{
+    height: 50px;
+}
 
 /* List Link */
 .navoneinner{
     display: flex;
     list-style-type: none;
     margin: 0px;
+    padding: 10px;
+    font-family: lean;
+}
+.navoneinner li{
+    padding: 20px;
 }
 .navoneinner li a{
-    padding: 20px;
     text-decoration: none;
-    color: white;
+    color: #6DD30B;
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+.navoneinner li a:hover{
+    color: #4A7F11;
 }
 
 .navtwo{
@@ -42,12 +67,242 @@ nav{
     color: white;
     text-decoration: none;
 }
-
-.navtwo a, .profile{
+.navtwo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.link{
     padding: 20px;
 }
+.link a{
+    font-family: lean;
+    text-decoration: none;
+    color:#DBAA0F;
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+.link a:hover{
+    color:#A57520 ;
+}
+/* Home Content */
+.Update{
+    display: flex;
+    width: 100%;
+    background-image: url(Images/Banner.png);
+    background-position: center;
+    background-size: cover;
+    padding: 80px;
+    height: 600px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.UpdateLogo img{
+    height: 180px;
+}
+.news{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(Images/Background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 60px;
+    
+}
+.newsHeader{
+    padding: 30px 30px 0px 30px;
+    font-family: lean;
+    font-size: 60px;
+    color: #6DD30B;
+}
+.line{
+    margin: 25px;
+    width: 70%;
+    padding: 1.5px;
+    color: #6DD30B;
 
+}
+.topNews{
+    display: flex;
+    padding: 20px;
+    width: 100%;
+    background-color:#513F2E;
+}
+.topnewsimage{
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+.topnewsimage img{
+    width: 100%;
+    border-radius: 20px;
+}
+.topnewstext{
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+.topnewsheadline{
+    font-family: lean;
+    color: #6DD30B;
+    font-size: 70px;
+}
+.topnewsinnertext{
+    text-align: center;
+    font-family: lean;
+    color: white;
+    font-size: 18px;
+}
+.speciallinktext a{
+    color:#DBAA0F;
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+.speciallinktext a:hover{
+    color:#A57520 ;
+}
+.newscontent{
+    display: flex;
+}
+.newscontentone{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    background-color: #3A2F26;
+    padding: 20px;
+}
+.newscontentoneimage{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.newscontentoneimage img{
+    border-radius: 20px;
+    width: 100%;
+}
+.newscontentonetext{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.newscontentoneinnerheadline{
+    font-family: lean;
+    color:#6DD30B;
+}
+.newscontentoneinnertext{
+    font-family: lean;
+    color: white;
+}
+/* Profile */
 
+.playerinfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url(Images/Background.png);
+    padding: 100px;
+}
+.playername{
+    font-family: lean;
+    color: white;
+    font-size: 80px;
+}
+.playerregion{
+    font-family: lean;
+    color:#DBAA0F ;
+    font-size: 40px;
+}
+.profilecontent{
+    display: flex;
+    flex-direction: column;
+    background-color:#513F2E;
+    width: 100%;
+}
+.profileOne{
+    display: flex;
+    justify-content: center;
+}
+.task{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+}
+.quiztime{
+    display: flex;
+    flex-direction: column;
+}
+.taskinnerheader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-family: lean;
+    color: #DBAA0F ;
+    font-size: 27px;
+}
+.taskheader{
+    font-family: lean;
+    color: #DBAA0F ;
+    font-size: 30px;
+    text-align: center;
+}
+.taskinneritem{
+    text-align: center;
+    color: white;
+    font-family: lean;
+    font-size: 60px;
+}
+.taskitem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.profiletwo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+.leaderboardheader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: lean;
+    width: 100%;
+    color: white;
+    background-image: url(Images/Background.png);
+    background-size: cover;
+    font-size: 40px;
+    padding: 40px;
+}
+.leaderboard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color:#513F2E;
+    width: 100%;
+
+}
 .signinsection{
     width: 100%;
     padding-left:500px;
@@ -66,6 +321,8 @@ footer{
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: yellow;
-    padding: 10px;
+    background-color: black;
+    padding: 5px;
+    color: white;
+    font-size: 10px;
 }
