@@ -52,7 +52,7 @@ $(document).ready(function(){
             console.log("Successful Signed In of " + email)
             console.log(auth.currentUser);
             //console.log("created user ... " + userCredential.toJson());
-            //window.location.href = "profile.html";
+            window.location.href = "profile.html";
           })
           .catch((error) => {
             const errorCode = error.code;

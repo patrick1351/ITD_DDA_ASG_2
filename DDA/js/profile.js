@@ -39,6 +39,25 @@ $(document).ready(function(){
             console.log("state = definitely signed out")
         }
     })
+
+    $("#signOut").click(function(event){
+        event.preventDefault();
+        auth.onAuthStateChanged(user => {
+            //log out player
+            if (user) {
+                console.log("Signing Out")
+                auth.signOut().then(function() {
+                    console.log('Signed Out');
+                    window.location.href = "index.html"
+                }, function(error) {
+                    console.error('Sign Out Error', error);
+                });
+            }
+            else {
+                console.log("Nothing to sign out boys")
+            }
+        })
+    })
     
     function GetLeaderbaord(uid){
         
