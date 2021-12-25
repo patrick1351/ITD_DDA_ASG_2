@@ -28,8 +28,8 @@
         <!-- Content -->
         <div class="Profile">
             <div class="playerinfo">
-                <div class="playername">USERNAME<!--Playername--></div>
-                <div class="playerregion">ASIA<!--Region--></div>
+                <div class="playername" id="username">USERNAME<!--Playername--></div>
+                <div class="playerregion" id="region">ASIA<!--Region--></div>
             </div>
             <div class="profilecontent">
                 <div class="profileOne">
@@ -40,16 +40,16 @@
                     <div class="task">
                         <div class="quiztime">
                             <div class="taskinnerheader">SPEEDRUN TIME</div>
-                            <div class="taskinneritem"><!--Display Speedrun time -->10:00:00</div>
+                            <div class="taskinneritem" id="speedRunTime"><!--Display Speedrun time -->10:00:00</div>
                         </div>
                         <div class="quiztime">
                             <div class="taskinnerheader">QUIZ SCORE</div>
-                            <div class="taskinneritem"><!--Display Quiz Score -->5/5</div>
+                            <div class="taskinneritem" id="quizScore"><!--Display Quiz Score -->5/5</div>
                         </div>
                     </div>
                     <div class="task">
                         <div class="taskheader">PLAYER GAME SESSIONS</div>
-                        <div class="taskitem"><!-- Display Player Logs Latest 5 (Max 5)--></div>
+                        <div class="taskitem" id="playeLogs"><!-- Display Player Logs Latest 5 (Max 5)--></div>
                     </div>
                 </div>
                 <div class="profiletwo">
@@ -62,4 +62,9 @@
             Copyright 2021 All Rights Reserevd YouSurvive &copy;
         </footer>
     </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js"></script>
+    <script src="js/profile.js" type="module"></script> 
 </html>
