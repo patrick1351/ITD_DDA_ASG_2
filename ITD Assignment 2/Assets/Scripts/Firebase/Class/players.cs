@@ -25,7 +25,7 @@ public class Players
 
     }
 
-    public Players(string email,string name, string region, int currentGame = 0)
+    public Players(string name,string email, string region, int currentGame = 0)
     {
         this.email = email;
         this.name = name;

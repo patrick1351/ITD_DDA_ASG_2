@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Tree : MonoBehaviour
 {
@@ -10,13 +11,18 @@ public class Tree : MonoBehaviour
     public GameObject leavesPrefab;
     GameManager gmScript;
 
+    //For the sound effect when chopping the tree
+    AudioSource woodChopping;
+
     private void Start()
     {
         gmScript = FindObjectOfType<GameManager>();
+        woodChopping = GetComponent<AudioSource>();
     }
 
     public void HitTree()
     {
+        woodChopping.Play();
         hits += 1;
         if (hits > numberOfHitsNeeded)
         {
