@@ -799,6 +799,7 @@ MonoBehaviour:
   numberOfHitsNeeded: 5
   logsPrefab: {fileID: 4405793210509139364, guid: 7b2e729003bd0ed45970d1d28f3497e5, type: 3}
   leavesPrefab: {fileID: 8750250084625160990, guid: c7956c84744208d4aa5f5c778d7d6d41, type: 3}
+  fbManager: {fileID: 0}
 --- !u!82 &-6837281191135763971
 AudioSource:
   m_ObjectHideFlags: 0
@@ -810,7 +811,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 4fc269cd0f8095145b518d50da0061b8, type: 2}
   m_audioClip: {fileID: 8300000, guid: ca6f604542199864caa109281ba30e8f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

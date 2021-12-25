@@ -9,11 +9,6 @@ public class LeaderboardManager : MonoBehaviour
     public FirebaseManager firebaseManager;
     public GameObject rowPrefab;
     public Transform tableContent;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //UpdateLeaderboardUI();
-    }
 
 
     public async void UpdateLeaderboardUI()

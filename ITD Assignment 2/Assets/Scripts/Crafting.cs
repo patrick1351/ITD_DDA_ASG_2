@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Crafting : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Crafting : MonoBehaviour
     int stick;
     int grass;
     int rope;
+    AudioSource craftingSound;
 
     GameManager gmScript;
 
@@ -58,7 +60,7 @@ public class Crafting : MonoBehaviour
                     {
                         Destroy(objectInSpot[x]);
                     }
-
+                    craftingSound.Play();
                     ResetCount();
                     return;
                 } else

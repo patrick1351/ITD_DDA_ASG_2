@@ -6,6 +6,7 @@ public class Campfire : MonoBehaviour
 {
     public GameObject fireSparkPrefab;
     public GameObject fireParticle;
+    public FirebaseManager fbManager;
 
     /// <summary>
     /// Starting chance
@@ -74,6 +75,9 @@ public class Campfire : MonoBehaviour
                 fireStarted = true;
                 fireParticle.SetActive(true);
                 Debug.Log("CAMPFIRE BURN BURN BURN");
+
+                //Add the campFire Count
+                fbManager.addCampFireNumber();
             } else
             {
                 Debug.Log("boo hoo better luck next time");

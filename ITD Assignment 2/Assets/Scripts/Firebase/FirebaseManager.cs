@@ -204,7 +204,7 @@ public class FirebaseManager : MonoBehaviour
         Query leaderboardQuery = dbLeaderboardReference.Child("leaderboard").OrderByChild("speedRunSeconds").LimitToLast(limit);
 
         List<Leaderboard> leaderboardList = new List<Leaderboard>();
-        await dbLeaderboardReference.GetValueAsync().ContinueWithOnMainThread(task =>
+        await leaderboardQuery.GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled || task.IsFaulted)
             {
@@ -215,7 +215,6 @@ public class FirebaseManager : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 if (snapshot.Exists)
                 {
-                    //int rankCounter = 1;
                     foreach (DataSnapshot i in snapshot.Children)
                     {
 
