@@ -39,7 +39,7 @@ public class AuthManager : MonoBehaviour
     {
         //Get the firebase reference on awake
         auth = FirebaseAuth.DefaultInstance;
-        //SignOutUser();
+        SignOutUser();
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
