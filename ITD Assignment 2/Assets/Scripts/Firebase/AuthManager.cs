@@ -39,20 +39,21 @@ public class AuthManager : MonoBehaviour
     {
         //Get the firebase reference on awake
         auth = FirebaseAuth.DefaultInstance;
+        SignOutUser();
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     public void Update()
     {
-        if (auth.CurrentUser != null)
+        if(auth.CurrentUser == null)
+        {
+            Debug.Log("There is no current user");
+        }
+        else if (auth.CurrentUser != null)
         {
             MainMenuUI.SetActive(true);
             SignInUI.SetActive(false);
             Debug.Log("There is currently a user that is logged in");
-        }
-        else if(auth.CurrentUser == null)
-        {
-            Debug.Log("There is no current user");
         }
     }
 
@@ -127,7 +128,7 @@ public class AuthManager : MonoBehaviour
                     //If this is the first player, create a brand new task board count
                     if(playerCount == 1)
                     {
-                        Debug.Log("This function is supposed to be called");
+                        //Debug.Log("This function is supposed to be called");
                         UserTasks newTaskBoard = new UserTasks(0, 0, 0, 0);
                         dbReference.Child("tasks").SetRawJsonValueAsync(newTaskBoard.TaskToJSON());
                     }
@@ -226,6 +227,7 @@ public class AuthManager : MonoBehaviour
                 MainMenuUI.SetActive(true);
                 LeaderboardManager lbmScript = FindObjectOfType<LeaderboardManager>();
                 lbmScript.UpdateLeaderboardUI();
+                Debug.Log("This function is being called");
             }
         });
     }
@@ -258,9 +260,5 @@ public class AuthManager : MonoBehaviour
             MainMenuUI.SetActive(false);
             SignInUI.SetActive(true);
         }
-    }
-    private void OnApplicationQuit()
-    {
-        SignOutUser();
     }
 }
