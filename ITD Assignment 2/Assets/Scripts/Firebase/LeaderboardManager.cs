@@ -13,6 +13,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public async void UpdateLeaderboardUI()
     {
+        Debug.Log("This function is being called but idk why the data is not being displayed");
         var leaderboardList = await firebaseManager.GetLeaderboard(3);
         int rankCounter = 1;
 
@@ -20,8 +21,18 @@ public class LeaderboardManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+        Debug.Log("Rows are supposed to be instantiate");
+        Debug.Log(leaderboardList);
         foreach (Leaderboard leaderboard in leaderboardList)
         {
+            if(leaderboard == null)
+            {
+                Debug.Log("<color=red>Something is wrong</color>");
+            } else
+            {
+                Debug.Log("<color=red>Something is working?</color>");
+            }
+            Debug.Log(leaderboard);
             Debug.Log("Is this function being called?");
             GameObject entry = Instantiate(rowPrefab, tableContent);
             TextMeshProUGUI[] leaderboardDetails = entry.GetComponentsInChildren<TextMeshProUGUI>();

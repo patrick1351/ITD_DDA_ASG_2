@@ -201,9 +201,10 @@ public class FirebaseManager : MonoBehaviour
     //For Showing the Leaderboard data
     public async Task<List<Leaderboard>>GetLeaderboard(int limit)
     {
-        Query leaderboardQuery = dbLeaderboardReference.Child("leaderboard").OrderByChild("speedRunSeconds").LimitToLast(limit);
+        Query leaderboardQuery = dbLeaderboardReference.OrderByChild("speedRunSeconds").LimitToFirst(limit);
 
         List<Leaderboard> leaderboardList = new List<Leaderboard>();
+
         await leaderboardQuery.GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled || task.IsFaulted)
@@ -212,17 +213,19 @@ public class FirebaseManager : MonoBehaviour
             }
             else if (task.IsCompleted)
             {
+                Debug.Log("Snapshot exists");
                 DataSnapshot snapshot = task.Result;
+                Debug.Log(snapshot);
                 if (snapshot.Exists)
                 {
                     foreach (DataSnapshot i in snapshot.Children)
                     {
-
+                        Debug.Log(i);
                         Leaderboard leaderboard = JsonUtility.FromJson<Leaderboard>(i.GetRawJsonValue());
 
                         leaderboardList.Add(leaderboard);
 
-                        //Debug.LogFormat("Leaderboard Playername {0} Speedruntime{1}", leaderboard.userName, leaderboard.speedRunSeconds);
+                        Debug.LogFormat("Leaderboard Playername {0} Speedruntime{1}", leaderboard.userName, leaderboard.speedRunSeconds);
                     }
                 }
             }
