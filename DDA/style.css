@@ -278,6 +278,7 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     background-color:#554639 ;
     padding: 60px;
@@ -286,6 +287,7 @@ nav{
     display: flex;
     justify-content: center;
     width: 100%;
+    padding: 20px;
 }
 .instructionArea{
     display: flex;
@@ -293,7 +295,7 @@ nav{
     justify-content: center;
     align-items: center;
     padding: 40px;
-    background-color:#513F2E ;
+    background-color:#3A2F26 ;
 }
 .instructionArea img{
     width: 100%;
@@ -305,6 +307,7 @@ nav{
     width: 100%;
     align-items: center;
     background-color: #3A2F26;
+    padding: 50px;
 }
 .instructionInfo h2{
     font-family: lean;
@@ -318,6 +321,100 @@ nav{
     font-family: lean;
     font-size: 20px;
 }
+/* Sign In */
+.SignHeader{
+    display: flex;
+    justify-content: center;
+    font-family:lean;
+    color: #6DD30B;
+}
+.signinsection{
+    width: 100%;
+    background-color:#3A2F26 ;
+    padding-top:30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 320px;
+}
+.signintitle{
+    font-family: lean;
+    color: #6DD30B;
+}
+.signinbtn{
+    background-color:#6DD30B;
+    font-family:lean;
+    color: white;
+    border: 5px solid black;
+    border-radius: 10px;
+    padding-left:80px;
+    padding-right: 80px;
+    padding-top:8px;
+    padding-bottom: 8px;
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+.signinbtn:hover{
+    background-color: #4A7F11;
+}
+/*Leaderboard*/
+.leaderboardpage{
+    display: flex;
+    justify-content: center;
+    width:100%;
+    padding:30px;
+    background-image:url(Images/Background.png);
+}
+.leaderboardinner{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: #554639 ;
+    border-radius: 5px;
+    flex-direction: column;
+}
+.leaderboardheadline{
+    display: flex;
+    justify-content: center;
+    font-family: lean;
+    color:#DBAA0F;
+    font-size: 60px;
+    padding:40px;
+}
+.leaderboardcontent{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+.leaderboardcontentheader{
+    display: flex;
+    justify-content: center;
+}
+.leaderboardcontentheaderinner{
+    font-family: lean;
+    font-size: 40px;
+    color:#6DD30B ;
+    padding-left: 140px;
+    padding-right: 140px;
+}
+.leaderboardinformation{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    background-color:#3A2F26 ;
+    border-radius: 0px 0px 5px 5px;
+}
+.userinfo{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding: 40px;
+    font-size: 30px;
+    font-family: lean;
+    color: white;
+}
+
 /* Profile */
 
 .playerinfo{
@@ -414,11 +511,6 @@ nav{
     background-color:#513F2E;
     width: 100%;
 
-}
-.signinsection{
-    width: 100%;
-    padding-top:30px;
-    padding-bottom: 320px;
 }
 .form-control{
     height: 50px;
