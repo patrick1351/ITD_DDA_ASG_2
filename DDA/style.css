@@ -206,6 +206,74 @@ nav{
     font-family: lean;
     color: white;
 }
+/* Wiki */
+.wikibanner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: lean;
+    color: white;
+    font-size: 100px;
+    padding: 80px;
+    height: 600px;
+    width: 100%;
+    background-image: url(Images/wikibackground.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.instructionstop{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-image:url(Images/Instructionsbackground.png);
+    background-size: contain;
+    background-position: center;
+    padding: 120px;
+}
+.instructiontopinner{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #4d3d2d ;
+    padding: 150px;
+    border-radius: 50px;
+}
+.instructionheadline{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+}
+.instructionheadline img{
+    height: 200px;
+}
+.instructioncontent{
+    display: flex;
+    width: 100%;
+    background-color:#3A2F26 ;
+    border-radius: 50px;
+    padding: 40px;
+    margin: 20px;
+}
+.instructioncontentindi{
+    display: flex;
+    flex: 1;
+}
+.instructioncontenttxt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    font-family: lean;
+    color:#DBAA0F;
+    font-size: 50px;
+
+}
+.instructioncontentindi img{
+    width: 100%;
+}
 /* Profile */
 
 .playerinfo{
