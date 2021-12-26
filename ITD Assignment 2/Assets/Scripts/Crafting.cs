@@ -24,6 +24,7 @@ public class Crafting : MonoBehaviour
     private void Start()
     {
         gmScript = FindObjectOfType<GameManager>();
+        craftingSound = this.GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider enter)
@@ -62,7 +63,6 @@ public class Crafting : MonoBehaviour
                     }
                     craftingSound.Play();
                     ResetCount();
-                    return;
                 } else
                 {
                     Debug.LogFormat("{0} does not have the same recipie", i.objectName);
