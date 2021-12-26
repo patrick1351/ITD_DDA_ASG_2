@@ -105,7 +105,7 @@ public class FirebaseManager : MonoBehaviour
                 //Add a number to the count
                 campFireNumber += 1;
                 //Update the value of it back at the database
-                dbTaskReference.Child("axe").SetValueAsync(campFireNumber.ToString());
+                dbTaskReference.Child("campFire").SetValueAsync(campFireNumber.ToString());
             }
         });
     }
@@ -127,7 +127,7 @@ public class FirebaseManager : MonoBehaviour
                 //Add a number to the count
                 tentNumber += 1;
                 //Update the value of it back at the database
-                dbTaskReference.Child("axe").SetValueAsync(tentNumber.ToString());
+                dbTaskReference.Child("tent").SetValueAsync(tentNumber.ToString());
             }
         });
     }
@@ -149,7 +149,7 @@ public class FirebaseManager : MonoBehaviour
                 //Add a number to the count
                 treeNumber += 1;
                 //Update the value of it back at the database
-                dbTaskReference.Child("axe").SetValueAsync(treeNumber.ToString());
+                dbTaskReference.Child("chopTree").SetValueAsync(treeNumber.ToString());
             }
         });
     }

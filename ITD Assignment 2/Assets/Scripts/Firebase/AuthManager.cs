@@ -39,7 +39,6 @@ public class AuthManager : MonoBehaviour
     {
         //Get the firebase reference on awake
         auth = FirebaseAuth.DefaultInstance;
-        SignOutUser();
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
@@ -260,5 +259,10 @@ public class AuthManager : MonoBehaviour
             MainMenuUI.SetActive(false);
             SignInUI.SetActive(true);
         }
+    }
+
+    public void OnApplicationQuit()
+    {
+        SignOutUser();
     }
 }
