@@ -25,47 +25,38 @@
                 <div class="link" id="navProfile"><a href="profile.html">PROFILE</a></div>
             </div>
         </nav>
-
-        <div class="container">
-            <h1 class="row justify-content-center mt-4 mb-4">Leaderboard</h1>
-            <table class="table table-striped">
-                <thead>
-                    <!-- Edit accordinly for header -->
-                    <tr>
-                        <th scope="col">Rank</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Quiz</th>
-                    </tr>
-                </thead>
-
-                <!-- user information -->
-                <tbody>
-                    <!-- Table content starts here -->
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>1 hour 15 minutes 30 seconds</td>
-                        <td>10/10</td>
-                    </tr>
-                    <!-- Table content ends here -->
-
-                    <!-- Table content starts here -->
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Patrick</td>
-                        <td>1 hour 50 minutes 30 seconds</td>
-                        <td>10/10</td>
-                    </tr>
-                    <!-- Table content ends here -->
-                </tbody>
-            </table>
+        <div class="leaderboardpage">
+            <div class="leaderboardinner">
+                <div class="leaderboardheadline">
+                    LEADERBOARD
+                </div>
+                <div class="leaderboardcontent" id="leaderboard">
+                    <div class="leaderboardcontentheader">
+                        <div class="leaderboardcontentheaderinner">RANK</div>
+                        <div class="leaderboardcontentheaderinner">USERNAME</div>
+                        <div class="leaderboardcontentheaderinner">TIME</div>
+                    </div>
+                    <!-- <div class="leaderboardinformation">
+                        <div class="userinfo">1</div>
+                        <div class="userinfo">Russell</div>
+                        <div class="userinfo">00:00:00</div>
+                    </div>
+                    <div class="leaderboardinformation">
+                        <div class="userinfo">1</div>
+                        <div class="userinfo">Russell</div>
+                        <div class="userinfo">00:00:00</div>
+                    </div> -->
+                </div>
+            </div>
         </div>
-        
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <footer>
+            Copyright 2021 All Rights Reserved YouSurvive &copy;
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js"></script>
         <script src="js/navCheck.js"  type="module"></script>
+        <script src="js/leaderboard.js" type="module"></script>
     </body>
 </html>

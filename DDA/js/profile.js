@@ -1,7 +1,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, initializeAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getDatabase, ref, child, get, set, orderByChild } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"
+import { getDatabase, ref, child, get, set, query, orderByChild, limitToLast, onValue, push  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"
 
 
 const firebaseConfig = {
@@ -21,6 +21,7 @@ const auth = getAuth();
 const user = auth.currentUser;
 const db = getDatabase();
 const dbref = ref(db);
+const dbLeaderboardRef = ref(db, 'leaderboard');
 //const playerProfile = red(db, "players/" + auth.currentUser.userID);
 
 $(document).ready(function(){
@@ -34,6 +35,8 @@ $(document).ready(function(){
             GetPlayer(uid);
             GetLeaderbaord(uid);
             GetQuiz(uid);
+            Leaderboard();
+            //GetPlayerLog(uid);
         }
         else {
             console.log("state = definitely signed out")
@@ -104,6 +107,45 @@ $(document).ready(function(){
         }
         }).catch((error) => {
         console.error(error);
+        });
+    }
+
+    async function Leaderboard(){
+        const leaderboardPos = query(ref(db, 'leaderboard/'), orderByChild('speedRunSeconds'), limitToLast(5))
+        let result = await get(query(leaderboardPos));
+        if (result !== null) {
+            var playerKey = Object.values(result.val());
+            for(var i = 0; i < playerKey.length; i++){
+                var pos = i + 1;
+                var name = playerKey[i].userName;
+                var time = playerKey[i].speedRunTime;
+                AddingLeaderboard(pos, name, time)
+                console.log(playerKey[i]);
+            }
+            //console.log(playerKey);
+        }
+    }
+
+    function AddingLeaderboard(pos, name, time){
+        console.log(`Position is: ${pos}, Name is: ${name}, Time is: ${time}`)
+        document.getElementById("leaderboard").innerHTML += `
+        <div class="leaderboardinformation">
+            <div class="userinfo">${pos}</div>
+            <div class="userinfo">${name}</div>
+            <div class="userinfo">${time}</div>
+        </div>
+        `;
+    }
+
+    function GetPlayerLog(uid){
+        get(child(dbref,`playerLogs/${uid}`)).then((snapshot) =>{
+            if(snapshot.exists()){
+                console.log(snapshot.val());
+            } else{
+                console.log("No data available");
+            }
+        }).catch((error) =>{
+            console.log(error);
         });
     }
 
