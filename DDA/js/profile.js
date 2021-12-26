@@ -25,6 +25,19 @@ const dbLeaderboardRef = ref(db, 'leaderboard');
 //const playerProfile = red(db, "players/" + auth.currentUser.userID);
 
 $(document).ready(function(){
+
+    JSC.Chart('chartDiv', {
+        type: 'pie',
+        series: [
+            {
+                points: [
+                    {x: 'Apples', y: 50},
+                    {x: 'Oranges', y: 42}
+                ]
+            }
+        ]
+    });
+
     console.log("state = unknown (until the callback is invoked)")
 
     auth.onAuthStateChanged(user => {
@@ -36,6 +49,11 @@ $(document).ready(function(){
             GetLeaderbaord(uid);
             GetQuiz(uid);
             Leaderboard();
+
+            //This is suppose to work with the correct data but idk why it doesnt work
+            let data = GetTask();
+            ToChart(data);
+            console.log(data);
             //GetPlayerLog(uid);
         }
         else {
@@ -107,6 +125,41 @@ $(document).ready(function(){
         }
         }).catch((error) => {
         console.error(error);
+        });
+    }
+    
+    function GetTask(){
+        let key = [];
+        get(child(dbref, `tasks`)).then((snapshot) => {
+            
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+                snapshot.forEach(function(x) {
+                    //console.log(x.val());
+                    key.push({name: x.key, y: x.val()})
+                });
+                
+            } else {
+                console.log("No data available");
+            }
+            }).catch((error) => {
+            console.error(error);
+            });
+         return [{name: 'Task', points: key}]
+    }
+
+    function ToChart(data){
+        console.log(data)
+        var chart = new JSC.Chart('chartDiv', {
+            debug: true,
+            type: 'pie',
+            series:
+            [
+                {
+                    name: "task",
+                    points: [{name: "axe", y: 100},{ name: "tent", y: 10}]
+                }
+            ]
         });
     }
 
