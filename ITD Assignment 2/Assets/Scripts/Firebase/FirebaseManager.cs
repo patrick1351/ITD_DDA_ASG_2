@@ -213,7 +213,7 @@ public class FirebaseManager : MonoBehaviour
             }
             else if (task.IsCompleted)
             {
-                Debug.Log("Snapshot exists");
+                //Debug.Log("Snapshot exists");
                 DataSnapshot snapshot = task.Result;
                 Debug.Log(snapshot);
                 if (snapshot.Exists)

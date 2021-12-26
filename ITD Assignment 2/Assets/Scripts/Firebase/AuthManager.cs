@@ -128,7 +128,7 @@ public class AuthManager : MonoBehaviour
                     //If this is the first player, create a brand new task board count
                     if(playerCount == 1)
                     {
-                        Debug.Log("This function is supposed to be called");
+                        //Debug.Log("This function is supposed to be called");
                         UserTasks newTaskBoard = new UserTasks(0, 0, 0, 0);
                         dbReference.Child("tasks").SetRawJsonValueAsync(newTaskBoard.TaskToJSON());
                     }
