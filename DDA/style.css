@@ -274,6 +274,50 @@ nav{
 .instructioncontentindi img{
     width: 100%;
 }
+.instructionbottominner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color:#554639 ;
+    padding: 60px;
+}
+.instructionbox{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.instructionArea{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color:#513F2E ;
+}
+.instructionArea img{
+    width: 100%;
+}
+.instructionInfo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    background-color: #3A2F26;
+}
+.instructionInfo h2{
+    font-family: lean;
+    font-size: 70px;
+    color:#6DD30B ;
+
+}
+.instructionInfo p{
+    color: #DBAA0F;
+    text-align: center;
+    font-family: lean;
+    font-size: 20px;
+}
 /* Profile */
 
 .playerinfo{
